@@ -4,13 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tebogo Mathaba - Portfolio</title>
-  <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript and Power BI.">
+  <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript, Power BI, and business management.">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
   <!-- Font Awesome for Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
     body {
       font-family: 'Poppins', sans-serif;
@@ -81,20 +83,14 @@
       transform: scale(1.1);
       box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
     }
-    .typing-text {
+    .flip-text {
       display: inline-block;
-      overflow: hidden;
-      white-space: nowrap;
-      border-right: 2px solid #60A5FA;
-      animation: typing 3s steps(40, end), blink 0.5s step-end infinite;
+      transform-style: preserve-3d;
+      animation: flip 1.5s ease-in-out forwards;
     }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    @keyframes blink {
-      from, to { border-color: transparent; }
-      50% { border-color: #60A5FA; }
+    @keyframes flip {
+      0% { transform: rotateX(-90deg); opacity: 0; }
+      100% { transform: rotateX(0deg); opacity: 1; }
     }
     /* About Animations */
     .slide-in-left {
@@ -171,7 +167,6 @@
     .wave-in:nth-child(2) { animation-delay: 0.4s; }
     .wave-in:nth-child(3) { animation-delay: 0.6s; }
     .wave-in:nth-child(4) { animation-delay: 0.8s; }
-    .wave-in:nth-child(5) { animation-delay: 1s; }
     @keyframes waveIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -256,7 +251,7 @@
     <div class="container mx-auto">
       <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba Profile Picture" class="profile-img w-40 h-40 mx-auto mb-6">
       <h2 class="text-4xl md:text-5xl font-bold mb-4">Welcome to My Portfolio</h2>
-      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto typing-text">Hi, I'm Tebogo Mathaba, a passionate software developer and business management enthusiast skilled in Python, JavaScript, Power BI, and more.</p>
+      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto flip-text">Hi, I'm Tebogo Mathaba, a passionate software developer and business management enthusiast skilled in Python, JavaScript, Power BI, and more.</p>
       <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold">View My Work</a>
     </div>
   </section>
@@ -326,7 +321,7 @@
         <!-- Project 2: To-Do List App -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="https://via.placeholder.com/300x200" alt="To-Do List App" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="My%20images/To_do_list.jpg" alt="To-Do List App" class="w-full h-48 object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">To-Do List App</h3>
               <p class="text-gray-600 mb-4">
@@ -335,13 +330,13 @@
             </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/tebogomathaba/todolist" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/Yolanda-loo/To-Do-List" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
           </div>
         </div>
         <!-- Project 3: Password Generator -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="https://via.placeholder.com/300x200" alt="Password Generator" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="My%20images/Password.jpg" alt="Password Generator" class="w-full h-48 object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">Password Generator</h3>
               <p class="text-gray-600 mb-4">
@@ -350,37 +345,22 @@
             </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/tebogomathaba/password-generator" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/Yolanda-loo/password_generator" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
           </div>
         </div>
         <!-- Project 4: Web Scraper -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="https://via.placeholder.com/300x200" alt="Web Scraper" class="w-full h-48 object-cover rounded-t-lg">
+            <img src="My%20images/web_scraper.jpg" alt="Web Scraper" class="w-full h-48 object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">Web Scraper</h3>
               <p class="text-gray-600 mb-4">
-                A Python-based web scraper using BeautifulSoup to extract quotes and authors from websites, with data displayed in a structured table using pandas.
+                A Python-based web scraper using BeautifulSoup to extract data from websites, with structured output for analysis.
               </p>
             </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, BeautifulSoup, pandas<br><a href="https://github.com/tebogomathaba/web-scraper" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
-          </div>
-        </div>
-        <!-- Project 5: Robot World -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <img src="https://via.placeholder.com/300x200" alt="Robot World" class="w-full h-48 object-cover rounded-t-lg">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Robot World</h3>
-              <p class="text-gray-600 mb-4">
-                A Java-based simulation of robots navigating a grid world, implementing server-client architecture and unit testing for robust functionality.
-              </p>
-            </div>
-          </div>
-          <div class="project-back">
-            <p>Tech Stack: Java, JUnit<br><a href="https://github.com/tebogomathaba/robot-world" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <p>Tech Stack: Python, BeautifulSoup, pandas<br><a href="https://github.com/Yolanda-loo/Web_Srapper" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
           </div>
         </div>
       </div>
@@ -394,15 +374,15 @@
       <form id="contact-form" class="max-w-lg mx-auto">
         <div class="mb-4 slide-up">
           <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-          <input type="text" id="name" class="form-input w-full p-3 border rounded-lg" required>
+          <input type="text" id="name" name="name" class="form-input w-full p-3 border rounded-lg" required>
         </div>
         <div class="mb-4 slide-up">
           <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" id="email" class="form-input w-full p-3 border rounded-lg" required>
+          <input type="email" id="email" name="email" class="form-input w-full p-3 border rounded-lg" required>
         </div>
         <div class="mb-4 slide-up">
           <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-          <textarea id="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
+          <textarea id="message" name="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
         </div>
         <button type="submit" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 slide-up">Send Message</button>
       </form>
@@ -417,7 +397,7 @@
       <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
         <i class="fab fa-github fa-lg"></i>
       </a>
-      <a href="https://linkedin.com/in/tebogomathaba" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
+      <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
         <i class="fab fa-linkedin fa-lg"></i>
       </a>
     </div>
@@ -425,6 +405,11 @@
 
   <!-- JavaScript for Animations and Contact Form -->
   <script>
+    // Initialize EmailJS with your User ID
+    (function(){
+      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+    })();
+
     // Scroll Progress Bar
     window.addEventListener('scroll', () => {
       const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
@@ -443,24 +428,47 @@
       }
     });
 
-    // Contact Form Submission with Shake Animation
+    // Contact Form Submission with EmailJS
     document.getElementById('contact-form').addEventListener('submit', function(event) {
       event.preventDefault();
+      const formMessage = document.getElementById('form-message');
       const name = document.getElementById('name').value;
       const email = document.getElementById('email').value;
       const message = document.getElementById('message').value;
 
       if (name && email && message) {
-        const formMessage = document.getElementById('form-message');
-        formMessage.classList.remove('hidden');
-        formMessage.classList.add('shake');
-        document.getElementById('contact-form').reset();
+        // Send email using EmailJS
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+          name: name,
+          email: email,
+          message: message
+        })
+        .then(function(response) {
+          formMessage.textContent = "Message sent successfully!";
+          formMessage.classList.remove('hidden', 'text-red-600');
+          formMessage.classList.add('text-green-600', 'shake');
+          document.getElementById('contact-form').reset();
+          setTimeout(() => {
+            formMessage.classList.remove('shake');
+            formMessage.classList.add('hidden');
+          }, 3000);
+        }, function(error) {
+          formMessage.textContent = "Failed to send message. Please try again.";
+          formMessage.classList.remove('hidden', 'text-green-600');
+          formMessage.classList.add('text-red-600', 'shake');
+          setTimeout(() => {
+            formMessage.classList.remove('shake');
+            formMessage.classList.add('hidden');
+          }, 3000);
+        });
+      } else {
+        formMessage.textContent = "Please fill out all fields.";
+        formMessage.classList.remove('hidden', 'text-green-600');
+        formMessage.classList.add('text-red-600', 'shake');
         setTimeout(() => {
           formMessage.classList.remove('shake');
           formMessage.classList.add('hidden');
         }, 3000);
-      } else {
-        alert('Please fill out all fields.');
       }
     });
 
