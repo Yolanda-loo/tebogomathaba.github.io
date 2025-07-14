@@ -1,2 +1,2 @@
 # tebogomathaba.github.io
-my pwersonal website
+my personal website
