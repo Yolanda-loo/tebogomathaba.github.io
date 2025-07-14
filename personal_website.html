@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tebogo Mathaba - Portfolio</title>
+  <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript, Power BI, and business management.">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      opacity: 0;
+      animation: pageLoad 1s ease-in-out forwards;
+    }
+    /* Page Load Animation */
+    @keyframes pageLoad {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    /* Navigation Animations */
+    .nav-link {
+      position: relative;
+      opacity: 0;
+      animation: fadeInNav 0.5s ease-in-out forwards;
+    }
+    .nav-link:nth-child(1) { animation-delay: 0.1s; }
+    .nav-link:nth-child(2) { animation-delay: 0.2s; }
+    .nav-link:nth-child(3) { animation-delay: 0.3s; }
+    .nav-link:nth-child(4) { animation-delay: 0.4s; }
+    .nav-link:nth-child(5) { animation-delay: 0.5s; }
+    @keyframes fadeInNav {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: #60A5FA;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    .nav-scrolled {
+      padding: 0.5rem 1rem;
+      transition: padding 0.3s ease;
+    }
+    /* Hero Animations */
+    .hero {
+      background: linear-gradient(135deg, #1E40AF 0%, #D1D5DB 100%);
+      background-attachment: fixed;
+      background-size: 200% 200%;
+      animation: zoomBackground 20s ease-in-out infinite;
+    }
+    @keyframes zoomBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .profile-img {
+      border-radius: 50%;
+      object-fit: cover;
+      animation: bounceIn 1s ease-in-out;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    .profile-img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+    }
+    .typing-text {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid #60A5FA;
+      animation: typing 3s steps(40, end), blink 0.5s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    @keyframes blink {
+      from, to { border-color: transparent; }
+      50% { border-color: #60A5FA; }
+    }
+    /* About Animations */
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideInLeft 0.8s ease-in-out forwards;
+    }
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(20px);
+      animation: slideInRight 0.8s ease-in-out forwards;
+    }
+    @keyframes slideInLeft {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideInRight {
+      to { opacity: 1; transform: translateX(0); }
+    }
+    /* Skills Animations */
+    .skill-tag {
+      opacity: 0;
+      animation: fadeInSkill 0.5s ease-in-out forwards;
+    }
+    .skill-tag:hover {
+      transform: scale(1.1);
+    }
+    .skill-tag:nth-child(odd) { animation-delay: calc(0.1s * var(--index)); }
+    .skill-tag:nth-child(even) { animation-delay: calc(0.15s * var(--index)); }
+    @keyframes fadeInSkill {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Project Animations */
+    .project-card {
+      position: relative;
+      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      transform-style: preserve-3d;
+    }
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .project-front, .project-back {
+      backface-visibility: hidden;
+      transition: transform 0.6s ease;
+    }
+    .project-back {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      transform: rotateY(180deg);
+      background: #1E40AF;
+      color: white;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .project-card:hover .project-front {
+      transform: rotateY(-180deg);
+    }
+    .project-card:hover .project-back {
+      transform: rotateY(0deg);
+    }
+    .wave-in {
+      opacity: 0;
+      animation: waveIn 0.8s ease-in-out forwards;
+    }
+    .wave-in:nth-child(1) { animation-delay: 0.2s; }
+    .wave-in:nth-child(2) { animation-delay: 0.4s; }
+    .wave-in:nth-child(3) { animation-delay: 0.6s; }
+    .wave-in:nth-child(4) { animation-delay: 0.8s; }
+    .wave-in:nth-child(5) { animation-delay: 1s; }
+    @keyframes waveIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    /* Contact Animations */
+    .form-input {
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+    .form-input:focus {
+      transform: scale(1.02);
+      border-color: #60A5FA;
+    }
+    .slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-in-out forwards;
+    }
+    .slide-up:nth-child(1) { animation-delay: 0.2s; }
+    .slide-up:nth-child(2) { animation-delay: 0.4s; }
+    .slide-up:nth-child(3) { animation-delay: 0.6s; }
+    .slide-up:nth-child(4) { animation-delay: 0.8s; }
+    @keyframes slideUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .shake {
+      animation: shake 0.5s ease-in-out;
+    }
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+    /* Footer Animations */
+    .social-icon:hover {
+      animation: pulse 0.8s ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    /* Scroll Progress Bar */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 4px;
+      background: #60A5FA;
+      width: 0;
+      z-index: 20;
+      transition: width 0.3s ease;
+    }
+    /* Blue Accent */
+    .blue-accent {
+      background-color: #1E40AF;
+    }
+    .blue-accent:hover {
+      background-color: #1E3A8A;
+    }
+  </style>
+</head>
+<body class="bg-gray-300 text-gray-800">
+  <!-- Scroll Progress Bar -->
+  <div class="progress-bar"></div>
+
+  <!-- Navigation -->
+  <nav id="navbar" class="bg-blue-800 bg-opacity-90 backdrop-blur-md text-white p-4 sticky top-0 shadow-md z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Tebogo Mathaba</h1>
+      <ul class="flex space-x-6">
+        <li><a href="#home" class="nav-link hover:text-blue-400">Home</a></li>
+        <li><a href="#about" class="nav-link hover:text-blue-400">About</a></li>
+        <li><a href="#skills" class="nav-link hover:text-blue-400">Skills</a></li>
+        <li><a href="#projects" class="nav-link hover:text-blue-400">Projects</a></li>
+        <li><a href="#contact" class="nav-link hover:text-blue-400">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero py-20 text-center text-white">
+    <div class="container mx-auto">
+      <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba Profile Picture" class="profile-img w-40 h-40 mx-auto mb-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Welcome to My Portfolio</h2>
+      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto typing-text">Hi, I'm Tebogo Mathaba, a passionate software developer and business management enthusiast skilled in Python, JavaScript, Power BI, and more.</p>
+      <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold">View My Work</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">About Me</h2>
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-lg mb-4 slide-in-right">
+          I'm Tebogo Mathaba, a final-year software development student at WeThinkCode, with a background in Information Technology and Computer Science (2018–2020) and a certificate in Information and Management Systems from Alison. 
+          My professional journey includes roles as a Scanner/Counter at Ghekko, Management Assistant at Volkswagen, Assistant Administrator at Founder Institute, and Assistant Manager at Investable, alongside training with Huawei (2020) and Mercer (2021).
+        </p>
+        <p class="text-lg mb-4 slide-in-left">
+          I specialize in creating data-driven solutions, such as management dashboards in Power BI, and have developed applications using Python, JavaScript, HTML, CSS, C#, and SQL. 
+          My certifications include Microsoft Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), Microsoft Digital Literacy, Web Designer Certification, and Project Planning (Spec Con).
+        </p>
+        <p class="text-lg slide-in-right">
+          Beyond technical skills, I bring strong leadership and communication abilities, honed as Editor-in-Chief of my school newspaper and through volunteer work with Higher Health and NOSA (First Aid Level 1). 
+          I'm excited to combine my passion for technology and business management to tackle new challenges.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills" class="bg-gray-400 py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">My Skills</h2>
+      <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 1;">Python</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 2;">JavaScript</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 3;">HTML</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 4;">CSS</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 5;">C#</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 6;">SQL</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 7;">Power BI</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 8;">Data Analysis</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 9;">Azure (AZ-204, AZ-900)</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 10;">Leadership</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 11;">Communication</span>
+        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 12;">Customer Service</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">My Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1: Power BI Dashboard -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <img src="https://via.placeholder.com/300x200" alt="Power BI Dashboard" class="w-full h-48 object-cover rounded-t-lg">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Power BI Management Dashboard</h3>
+              <p class="text-gray-600 mb-4">
+                Developed interactive dashboards for business management, enabling data-driven decisions through scheduling, data analysis, and visualizations.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Power BI, SQL, Data Analysis<br>Available upon request</p>
+          </div>
+        </div>
+        <!-- Project 2: To-Do List App -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <img src="https://via.placeholder.com/300x200" alt="To-Do List App" class="w-full h-48 object-cover rounded-t-lg">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">To-Do List App</h3>
+              <p class="text-gray-600 mb-4">
+                A task management application built with Python (Tkinter) and Java (Swing), featuring add, delete, and view tasks with a user-friendly GUI.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/tebogomathaba/todolist" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+        <!-- Project 3: Password Generator -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <img src="https://via.placeholder.com/300x200" alt="Password Generator" class="w-full h-48 object-cover rounded-t-lg">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Password Generator</h3>
+              <p class="text-gray-600 mb-4">
+                A secure password generator with customizable length and character types, built with Python (Tkinter) and Java (Swing) for a seamless user experience.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/tebogomathaba/password-generator" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+        <!-- Project 4: Web Scraper -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <img src="https://via.placeholder.com/300x200" alt="Web Scraper" class="w-full h-48 object-cover rounded-t-lg">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Web Scraper</h3>
+              <p class="text-gray-600 mb-4">
+                A Python-based web scraper using BeautifulSoup to extract quotes and authors from websites, with data displayed in a structured table using pandas.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Python, BeautifulSoup, pandas<br><a href="https://github.com/tebogomathaba/web-scraper" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+        <!-- Project 5: Robot World -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <img src="https://via.placeholder.com/300x200" alt="Robot World" class="w-full h-48 object-cover rounded-t-lg">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Robot World</h3>
+              <p class="text-gray-600 mb-4">
+                A Java-based simulation of robots navigating a grid world, implementing server-client architecture and unit testing for robust functionality.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Java, JUnit<br><a href="https://github.com/tebogomathaba/robot-world" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="bg-gray-400 py-16">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-up">Get in Touch</h2>
+      <form id="contact-form" class="max-w-lg mx-auto">
+        <div class="mb-4 slide-up">
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" class="form-input w-full p-3 border rounded-lg" required>
+        </div>
+        <div class="mb-4 slide-up">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" class="form-input w-full p-3 border rounded-lg" required>
+        </div>
+        <div class="mb-4 slide-up">
+          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
+          <textarea id="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
+        </div>
+        <button type="submit" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 slide-up">Send Message</button>
+      </form>
+      <p id="form-message" class="text-center mt-4 text-green-600 hidden">Message sent successfully!</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-blue-800 text-white py-6 text-center">
+    <p class="mb-2">© 2025 Tebogo Mathaba. All rights reserved.</p>
+    <div class="flex justify-center space-x-4">
+      <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
+        <i class="fab fa-github fa-lg"></i>
+      </a>
+      <a href="https://linkedin.com/in/tebogomathaba" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
+        <i class="fab fa-linkedin fa-lg"></i>
+      </a>
+    </div>
+  </footer>
+
+  <!-- JavaScript for Animations and Contact Form -->
+  <script>
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.querySelector('.progress-bar').style.width = scrolled + '%';
+    });
+
+    // Sticky Nav Shrink
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Contact Form Submission with Shake Animation
+    document.getElementById('contact-form').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (name && email && message) {
+        const formMessage = document.getElementById('form-message');
+        formMessage.classList.remove('hidden');
+        formMessage.classList.add('shake');
+        document.getElementById('contact-form').reset();
+        setTimeout(() => {
+          formMessage.classList.remove('shake');
+          formMessage.classList.add('hidden');
+        }, 3000);
+      } else {
+        alert('Please fill out all fields.');
+      }
+    });
+
+    // Scroll Animation for Elements
+    const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .wave-in, .slide-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add(entry.target.classList.contains('slide-in-left') ? 'slide-in-left' : 
+                                    entry.target.classList.contains('slide-in-right') ? 'slide-in-right' : 
+                                    entry.target.classList.contains('wave-in') ? 'wave-in' : 'slide-up');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    animatedElements.forEach(element => observer.observe(element));
+  </script>
+</body>
+</html>
