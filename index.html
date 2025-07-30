@@ -119,6 +119,7 @@
       position: relative;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       transform-style: preserve-3d;
+      min-height: 200px; /* Ensure consistent card height */
     }
     .project-card:hover {
       transform: translateY(-10px);
@@ -158,6 +159,8 @@
     .wave-in:nth-child(2) { animation-delay: 0.4s; }
     .wave-in:nth-child(3) { animation-delay: 0.6s; }
     .wave-in:nth-child(4) { animation-delay: 0.8s; }
+    .wave-in:nth-child(5) { animation-delay: 1.0s; }
+    .wave-in:nth-child(6) { animation-delay: 1.2s; }
     @keyframes waveIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -216,6 +219,15 @@
     }
     .blue-accent:hover {
       background-color: #1E3A8A;
+    }
+    /* Responsive Adjustments */
+    @media (max-width: 640px) {
+      .project-card {
+        min-height: 250px; /* Slightly taller cards for mobile readability */
+      }
+      .grid {
+        gap: 1rem; /* Reduce gap for better spacing */
+      }
     }
   </style>
 </head>
@@ -293,11 +305,10 @@
   <section id="projects" class="py-16">
     <div class="container mx-auto px-4">
       <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">My Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         <!-- Project 1: Power BI Dashboard -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="https://via.placeholder.com/300x200" alt="Power BI Dashboard" class="w-full h-48 object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">Power BI Management Dashboard</h3>
               <p class="text-gray-600 mb-4">
@@ -312,7 +323,6 @@
         <!-- Project 2: To-Do List App -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="My images/To_do_list.jpg" alt="To-Do List App" class="w-full h-48 object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">To-Do List App</h3>
               <p class="text-gray-600 mb-4">
@@ -327,7 +337,6 @@
         <!-- Project 3: Password Generator -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="My%20images/Password.jpg" alt="Password Generator" class="w-full h-48 object-cover roundedcarry-forward
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">Password Generator</h3>
               <p class="text-gray-600 mb-4">
@@ -342,7 +351,6 @@
         <!-- Project 4: Web Scraper -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
           <div class="project-front">
-            <img src="My images/web_scraper.jpG" alt="Web Scraper" class="w-full h- object-cover rounded-t-lg">
             <div class="p-6">
               <h3 class="text-xl font-semibold mb-2">Web Scraper</h3>
               <p class="text-gray-600 mb-4">
@@ -352,6 +360,34 @@
           </div>
           <div class="project-back">
             <p>Tech Stack: Python, BeautifulSoup, pandas<br><a href="https://github.com/Yolanda-loo/Web_Srapper" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+        <!-- Project 5: Snake Game -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Snake Game</h3>
+              <p class="text-gray-600 mb-4">
+                A classic Snake game built with Python and Pygame, featuring smooth controls, score tracking, and collision detection for an engaging user experience.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Python, Pygame<br><a href="https://github.com/tebogomathaba/snake-game" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+          </div>
+        </div>
+        <!-- Project 6: Guessing Number Game -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front">
+            <div class="p-6">
+              <h3 class="text-xl font-semibold mb-2">Guessing Number Game</h3>
+              <p class="text-gray-600 mb-4">
+                An interactive number guessing game built with Python, where players guess a randomly generated number with feedback on attempts and hints.
+              </p>
+            </div>
+          </div>
+          <div class="project-back">
+            <p>Tech Stack: Python<br><a href="https://github.com/tebogomathaba/guessing-number-game" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
           </div>
         </div>
       </div>
