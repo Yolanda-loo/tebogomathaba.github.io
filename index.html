@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebogo Mathaba - Portfolio</title>
+  <title>Tebogo Mathaba - Software Developer Portfolio</title>
   <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript, Power BI, and business management.">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -14,17 +14,28 @@
   <!-- EmailJS SDK -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
+    :root {
+      --primary-blue: #1E40AF;
+      --secondary-blue: #60A5FA;
+      --dark-blue: #1E3A8A;
+      --light-gray: #D1D5DB;
+      --medium-gray: #9CA3AF;
+    }
+    
     body {
       font-family: 'Poppins', sans-serif;
       scroll-behavior: smooth;
       opacity: 0;
       animation: pageLoad 1s ease-in-out forwards;
+      line-height: 1.6;
     }
+    
     /* Page Load Animation */
     @keyframes pageLoad {
       from { opacity: 0; }
       to { opacity: 1; }
     }
+    
     /* Navigation Animations */
     .nav-link {
       position: relative;
@@ -36,10 +47,12 @@
     .nav-link:nth-child(3) { animation-delay: 0.3s; }
     .nav-link:nth-child(4) { animation-delay: 0.4s; }
     .nav-link:nth-child(5) { animation-delay: 0.5s; }
+    
     @keyframes fadeInNav {
       from { opacity: 0; transform: translateY(-10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
     .nav-link::after {
       content: '';
       position: absolute;
@@ -47,88 +60,134 @@
       height: 2px;
       bottom: -2px;
       left: 0;
-      background-color: #60A5FA;
+      background-color: var(--secondary-blue);
       transition: width 0.3s ease;
     }
+    
     .nav-link:hover::after {
       width: 100%;
     }
+    
     .nav-scrolled {
       padding: 0.5rem 1rem;
       transition: padding 0.3s ease;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
     }
+    
     /* Hero Animations */
     .hero {
-      background: linear-gradient(135deg, #1E40AF 0%, #D1D5DB 100%);
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-gray) 100%);
       background-attachment: fixed;
       background-size: 200% 200%;
       animation: zoomBackground 20s ease-in-out infinite;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1);
+      z-index: 0;
+    }
+    
+    .hero > * {
+      position: relative;
+      z-index: 1;
+    }
+    
     @keyframes zoomBackground {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
+    
     .profile-img {
       border-radius: 50%;
       object-fit: cover;
       animation: bounceIn 1s ease-in-out;
+      border: 4px solid white;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
+    
     @keyframes bounceIn {
       0% { transform: scale(0.8); opacity: 0; }
       60% { transform: scale(1.1); opacity: 1; }
       100% { transform: scale(1); }
     }
+    
     .profile-img:hover {
-      transform: scale(1.1);
-      box-shadow: 0 0 15px rgba(96, 165, 250, 0.5);
+      transform: scale(1.05);
+      box-shadow: 0 0 20px rgba(96, 165, 250, 0.7);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
+    
     /* About Animations */
     .slide-in-left {
       opacity: 0;
       transform: translateX(-20px);
       animation: slideInLeft 0.8s ease-in-out forwards;
     }
+    
     .slide-in-right {
       opacity: 0;
       transform: translateX(20px);
       animation: slideInRight 0.8s ease-in-out forwards;
     }
+    
     @keyframes slideInLeft {
       to { opacity: 1; transform: translateX(0); }
     }
+    
     @keyframes slideInRight {
       to { opacity: 1; transform: translateX(0); }
     }
+    
     /* Skills Animations */
     .skill-tag {
       opacity: 0;
       animation: fadeInSkill 0.5s ease-in-out forwards;
+      transition: all 0.3s ease;
     }
+    
     .skill-tag:hover {
-      transform: scale(1.1);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
+    
     .skill-tag:nth-child(odd) { animation-delay: calc(0.1s * var(--index)); }
     .skill-tag:nth-child(even) { animation-delay: calc(0.15s * var(--index)); }
+    
     @keyframes fadeInSkill {
       from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
     /* Project Animations */
     .project-card {
       position: relative;
       transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
       transform-style: preserve-3d;
-      min-height: 200px; /* Ensure consistent card height */
+      min-height: 280px;
+      border-radius: 0.75rem;
+      overflow: hidden;
     }
+    
     .project-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
     }
+    
     .project-front, .project-back {
       backface-visibility: hidden;
       transition: transform 0.6s ease;
+      height: 100%;
     }
+    
     .project-back {
       position: absolute;
       top: 0;
@@ -136,258 +195,468 @@
       width: 100%;
       height: 100%;
       transform: rotateY(180deg);
-      background: #1E40AF;
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
       color: white;
       padding: 1.5rem;
-      border-radius: 0.5rem;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
+    
     .project-card:hover .project-front {
       transform: rotateY(-180deg);
     }
+    
     .project-card:hover .project-back {
       transform: rotateY(0deg);
     }
+    
     .wave-in {
       opacity: 0;
       animation: waveIn 0.8s ease-in-out forwards;
     }
+    
     .wave-in:nth-child(1) { animation-delay: 0.2s; }
     .wave-in:nth-child(2) { animation-delay: 0.4s; }
     .wave-in:nth-child(3) { animation-delay: 0.6s; }
     .wave-in:nth-child(4) { animation-delay: 0.8s; }
     .wave-in:nth-child(5) { animation-delay: 1.0s; }
     .wave-in:nth-child(6) { animation-delay: 1.2s; }
+    
     @keyframes waveIn {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    
     /* Contact Animations */
     .form-input {
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      border: 2px solid #E5E7EB;
     }
+    
     .form-input:focus {
       transform: scale(1.02);
-      border-color: #60A5FA;
+      border-color: var(--secondary-blue);
+      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+      outline: none;
     }
+    
     .slide-up {
       opacity: 0;
       transform: translateY(20px);
       animation: slideUp 0.8s ease-in-out forwards;
     }
+    
     .slide-up:nth-child(1) { animation-delay: 0.2s; }
     .slide-up:nth-child(2) { animation-delay: 0.4s; }
     .slide-up:nth-child(3) { animation-delay: 0.6s; }
     .slide-up:nth-child(4) { animation-delay: 0.8s; }
+    
     @keyframes slideUp {
       to { opacity: 1; transform: translateY(0); }
     }
+    
     .shake {
       animation: shake 0.5s ease-in-out;
     }
+    
     @keyframes shake {
       0%, 100% { transform: translateX(0); }
       20%, 60% { transform: translateX(-5px); }
       40%, 80% { transform: translateX(5px); }
     }
+    
     /* Footer Animations */
+    .social-icon {
+      transition: transform 0.3s ease;
+    }
+    
     .social-icon:hover {
-      animation: pulse 0.8s ease-in-out;
+      transform: translateY(-3px);
+      color: var(--secondary-blue) !important;
     }
-    @keyframes pulse {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); }
-      100% { transform: scale(1); }
-    }
+    
     /* Scroll Progress Bar */
     .progress-bar {
       position: fixed;
       top: 0;
       left: 0;
       height: 4px;
-      background: #60A5FA;
+      background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
       width: 0;
       z-index: 20;
       transition: width 0.3s ease;
     }
+    
     /* Blue Accent */
     .blue-accent {
-      background-color: #1E40AF;
+      background-color: var(--primary-blue);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .blue-accent::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    .blue-accent:hover::before {
+      left: 100%;
+    }
+    
     .blue-accent:hover {
-      background-color: #1E3A8A;
+      background-color: var(--dark-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
     }
+    
+    /* Section spacing */
+    section {
+      scroll-margin-top: 80px;
+    }
+    
+    /* Back to top button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--primary-blue);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 10;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .back-to-top:hover {
+      background: var(--dark-blue);
+      transform: translateY(-3px);
+    }
+    
     /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--primary-blue);
+        padding: 1rem;
+        display: none;
+      }
+      
+      .nav-links.active {
+        display: flex;
+      }
+      
+      .nav-link {
+        padding: 0.5rem 0;
+        width: 100%;
+        text-align: center;
+      }
+      
+      .hamburger {
+        display: block;
+      }
+      
+      .project-card {
+        min-height: 300px;
+      }
+    }
+    
     @media (max-width: 640px) {
       .project-card {
-        min-height: 250px; /* Slightly taller cards for mobile readability */
+        min-height: 320px;
       }
-      .grid {
-        gap: 1rem; /* Reduce gap for better spacing */
+      
+      .hero h2 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+    
+    /* Print styles */
+    @media print {
+      .hero, .back-to-top, .progress-bar, nav {
+        display: none;
+      }
+      
+      body {
+        color: black;
+        background: white;
       }
     }
   </style>
 </head>
-<body class="bg-gray-300 text-gray-800">
+<body class="bg-gray-100 text-gray-800">
   <!-- Scroll Progress Bar -->
   <div class="progress-bar"></div>
+
+  <!-- Back to Top Button -->
+  <div class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
 
   <!-- Navigation -->
   <nav id="navbar" class="bg-blue-800 bg-opacity-90 backdrop-blur-md text-white p-4 sticky top-0 shadow-md z-10">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-xl font-bold">Tebogo Mathaba</h1>
-      <ul class="flex space-x-6">
-        <li><a href="#home" class="nav-link hover:text-blue-400">Home</a></li>
-        <li><a href="#about" class="nav-link hover:text-blue-400">About</a></li>
-        <li><a href="#skills" class="nav-link hover:text-blue-400">Skills</a></li>
-        <li><a href="#projects" class="nav-link hover:text-blue-400">Projects</a></li>
-        <li><a href="#contact" class="nav-link hover:text-blue-400">Contact</a></li>
+      <button class="hamburger md:hidden text-white focus:outline-none">
+        <i class="fas fa-bars text-xl"></i>
+      </button>
+      <ul class="nav-links hidden md:flex space-x-6">
+        <li><a href="#home" class="nav-link hover:text-blue-300 transition">Home</a></li>
+        <li><a href="#about" class="nav-link hover:text-blue-300 transition">About</a></li>
+        <li><a href="#skills" class="nav-link hover:text-blue-300 transition">Skills</a></li>
+        <li><a href="#projects" class="nav-link hover:text-blue-300 transition">Projects</a></li>
+        <li><a href="#contact" class="nav-link hover:text-blue-300 transition">Contact</a></li>
       </ul>
     </div>
   </nav>
 
   <!-- Hero Section -->
   <section id="home" class="hero py-20 text-center text-white">
-    <div class="container mx-auto">
-      <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba Profile Picture" class="profile-img w-40 h-40 mx-auto mb-6">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">Welcome to My Portfolio</h2>
-      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Hi, I'm Tebogo Mathaba, a passionate software developer and business management enthusiast skilled in Python, JavaScript, Power BI, and more.</p>
-      <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold">View My Work</a>
+    <div class="container mx-auto px-4">
+      <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba - Software Developer" class="profile-img w-40 h-40 mx-auto mb-6">
+      <h2 class="text-4xl md:text-5xl font-bold mb-4">Software Developer & Data Analyst</h2>
+      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Hi, I'm Tebogo Mathaba, a passionate software developer specializing in Python, JavaScript, Power BI, and business management solutions.</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold inline-block">View My Work</a>
+        <a href="#contact" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">Contact Me</a>
+      </div>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-16">
+  <section id="about" class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">About Me</h2>
-      <div class="max-w-3xl mx-auto text-center">
-        <p class="text-lg mb-4 slide-in-right">
-          I'm Tebogo Mathaba, a final-year software development student at WeThinkCode, with a background in Information Technology and Computer Science (2018–2020) and a certificate in Information and Management Systems from Alison. 
-          My professional journey includes roles as a Scanner/Counter at Ghekko, Management Assistant at Volkswagen, Assistant Administrator at Founder Institute, and Assistant Manager at Investable, alongside training with Huawei (2020) and Mercer (2021).
-        </p>
-        <p class="text-lg mb-4 slide-in-left">
-          I specialize in creating data-driven solutions, such as management dashboards in Power BI, and have developed applications using Python, JavaScript, HTML, CSS, C#, and SQL. 
-          My certifications include Microsoft Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), Microsoft Digital Literacy, Web Designer Certification, and Project Planning (Spec Con).
-        </p>
-        <p class="text-lg slide-in-right">
-          Beyond technical skills, I bring strong leadership and communication abilities, honed as Editor-in-Chief of my school newspaper and through volunteer work with Higher Health and NOSA (First Aid Level 1). 
-          I'm excited to combine my passion for technology and business management to tackle new challenges.
-        </p>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">About Me</h2>
+      <div class="max-w-4xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <div class="slide-in-left">
+            <h3 class="text-2xl font-semibold mb-4 text-blue-800">My Journey</h3>
+            <p class="text-lg mb-4">
+              I'm a final-year software development student at WeThinkCode, with a background in Information Technology and Computer Science (2018–2020) and a certificate in Information and Management Systems from Alison.
+            </p>
+            <p class="text-lg mb-4">
+              My professional experience spans roles as a Scanner/Counter at Ghekko, Management Assistant at Volkswagen, Assistant Administrator at Founder Institute, and Assistant Manager at Investable, complemented by training with Huawei (2020) and Mercer (2021).
+            </p>
+          </div>
+          <div class="slide-in-right bg-blue-50 p-6 rounded-lg">
+            <h3 class="text-2xl font-semibold mb-4 text-blue-800">What I Do</h3>
+            <p class="text-lg mb-4">
+              I specialize in creating data-driven solutions, such as management dashboards in Power BI, and have developed applications using Python, JavaScript, HTML, CSS, C#, and SQL.
+            </p>
+            <p class="text-lg">
+              My certifications include Microsoft Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), Microsoft Digital Literacy, Web Designer Certification, and Project Planning (Spec Con).
+            </p>
+          </div>
+        </div>
+        <div class="mt-8 text-center slide-in-right">
+          <p class="text-lg">
+            Beyond technical skills, I bring strong leadership and communication abilities, honed as Editor-in-Chief of my school newspaper and through volunteer work with Higher Health and NOSA (First Aid Level 1). I'm excited to combine my passion for technology and business management to tackle new challenges.
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Skills Section -->
-  <section id="skills" class="bg-gray-400 py-16">
+  <section id="skills" class="bg-gray-50 py-16">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">My Skills</h2>
-      <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 1;">Python</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 2;">JavaScript</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 3;">HTML</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 4;">CSS</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 5;">C#</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 6;">SQL</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 7;">Power BI</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 8;">Data Analysis</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 9;">Azure (AZ-204, AZ-900)</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 10;">Leadership</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 11;">Communication</span>
-        <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-blue-700 transition" style="--index: 12;">Customer Service</span>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">My Skills</h2>
+      <div class="max-w-4xl mx-auto">
+        <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">Technical Skills</h3>
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 1;">Python</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 2;">JavaScript</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 3;">HTML/CSS</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 4;">C#</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 5;">SQL</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 6;">Power BI</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 7;">Data Analysis</span>
+          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 8;">Azure (AZ-204, AZ-900)</span>
+        </div>
+        
+        <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">Professional Skills</h3>
+        <div class="flex flex-wrap justify-center gap-3">
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 9;">Leadership</span>
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 10;">Communication</span>
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 11;">Customer Service</span>
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 12;">Project Management</span>
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 13;">Problem Solving</span>
+          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 14;">Team Collaboration</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Projects Section -->
-  <section id="projects" class="py-16">
+  <section id="projects" class="py-16 bg-white">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-in-left">My Projects</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">My Projects</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         <!-- Project 1: Power BI Dashboard -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Power BI Management Dashboard</h3>
-              <p class="text-gray-600 mb-4">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-chart-bar text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Power BI Management Dashboard</h3>
+              <p class="text-gray-600">
                 Developed interactive dashboards for business management, enabling data-driven decisions through scheduling, data analysis, and visualizations.
               </p>
             </div>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Data Visualization • Business Intelligence</span>
+            </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Power BI, SQL, Data Analysis<br>Available upon request</p>
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Power BI, SQL, Data Analysis</p>
+            <p class="text-sm opacity-90">Available upon request</p>
           </div>
         </div>
+        
         <!-- Project 2: To-Do List App -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">To-Do List App</h3>
-              <p class="text-gray-600 mb-4">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-tasks text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">To-Do List App</h3>
+              <p class="text-gray-600">
                 A task management application built with Python (Tkinter) and Java (Swing), featuring add, delete, and view tasks with a user-friendly GUI.
               </p>
             </div>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Python • Java • GUI Development</span>
+            </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/Yolanda-loo/To-Do-List" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Python, Tkinter, Java, Swing</p>
+            <a href="https://github.com/Yolanda-loo/To-Do-List" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
           </div>
         </div>
+        
         <!-- Project 3: Password Generator -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Password Generator</h3>
-              <p class="text-gray-600 mb-4">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-key text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Password Generator</h3>
+              <p class="text-gray-600">
                 A secure password generator with customizable length and character types, built with Python (Tkinter) and Java (Swing) for a seamless user experience.
               </p>
             </div>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Security • Python • Java</span>
+            </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, Tkinter, Java, Swing<br><a href="https://github.com/Yolanda-loo/password_generator" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Python, Tkinter, Java, Swing</p>
+            <a href="https://github.com/Yolanda-loo/password_generator" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
           </div>
         </div>
+        
         <!-- Project 4: Web Scraper -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Web Scraper</h3>
-              <p class="text-gray-600 mb-4">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-spider text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Web Scraper</h3>
+              <p class="text-gray-600">
                 A Python-based web scraper using BeautifulSoup to extract data from websites, with structured output for analysis.
               </p>
             </div>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Web Scraping • Data Extraction • Python</span>
+            </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python, BeautifulSoup, pandas<br><a href="https://github.com/Yolanda-loo/Web_Srapper" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Python, BeautifulSoup, pandas</p>
+            <a href="https://github.com/Yolanda-loo/Web_Srapper" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
           </div>
         </div>
+        
         <!-- Project 5: Snake Game -->
         <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Snake Game</h3>
-              <p class="text-gray-600 mb-4">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-gamepad text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Snake Game</h3>
+              <p class="text-gray-600">
                 A classic Snake game built with Python and Pygame, featuring smooth controls, score tracking, and collision detection for an engaging user experience.
               </p>
             </div>
-          </div>
-          <div class="project-back">
-            <p>Tech Stack: Python, Pygame<br><a href="https://github.com/tebogomathaba/snake-game" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
-          </div>
-        </div>
-        <!-- Project 6: Guessing Number Game -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front">
-            <div class="p-6">
-              <h3 class="text-xl font-semibold mb-2">Guessing Number Game</h3>
-              <p class="text-gray-600 mb-4">
-                An interactive number guessing game built with Python, where players guess a randomly generated number with feedback on attempts and hints.
-              </p>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Game Development • Python • Pygame</span>
             </div>
           </div>
           <div class="project-back">
-            <p>Tech Stack: Python<br><a href="https://github.com/tebogomathaba/guessing-number-game" target="_blank" class="text-blue-400 hover:underline">View on GitHub</a></p>
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Python, Pygame</p>
+            <a href="https://github.com/tebogomathaba/snake-game" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
+          </div>
+        </div>
+        
+        <!-- Project 6: Guessing Number Game -->
+        <div class="project-card bg-white rounded-lg shadow-md wave-in">
+          <div class="project-front h-full flex flex-col">
+            <div class="p-6 flex-grow">
+              <div class="mb-4 text-blue-800">
+                <i class="fas fa-dice text-3xl"></i>
+              </div>
+              <h3 class="text-xl font-semibold mb-3">Guessing Number Game</h3>
+              <p class="text-gray-600">
+                An interactive number guessing game built with Python, where players guess a randomly generated number with feedback on attempts and hints.
+              </p>
+            </div>
+            <div class="p-4 bg-gray-50 border-t">
+              <span class="text-sm text-blue-800 font-medium">Python • Game Logic • User Interaction</span>
+            </div>
+          </div>
+          <div class="project-back">
+            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
+            <p class="mb-4">Tech Stack: Python</p>
+            <a href="https://github.com/tebogomathaba/guessing-number-game" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
           </div>
         </div>
       </div>
@@ -395,38 +664,73 @@
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="bg-gray-400 py-16">
+  <section id="contact" class="bg-gray-50 py-16">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 slide-up">Get in Touch</h2>
-      <form id="contact-form" class="max-w-lg mx-auto">
-        <div class="mb-4 slide-up">
-          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
-          <input type="text" id="name" name="name" class="form-input w-full p-3 border rounded-lg" required>
+      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-up">Get in Touch</h2>
+      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
+        <div class="slide-up">
+          <h3 class="text-2xl font-semibold mb-4 text-blue-800">Let's Connect</h3>
+          <p class="mb-6">I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.</p>
+          <div class="space-y-4">
+            <div class="flex items-center">
+              <i class="fas fa-envelope text-blue-800 mr-3"></i>
+              <span>tebogo.mathaba@example.com</span> <!-- Replace with actual email -->
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-phone text-blue-800 mr-3"></i>
+              <span>+27 12 345 6789</span> <!-- Replace with actual phone number -->
+            </div>
+            <div class="flex items-center">
+              <i class="fas fa-map-marker-alt text-blue-800 mr-3"></i>
+              <span>Johannesburg, South Africa</span>
+            </div>
+          </div>
+          <div class="mt-6 flex space-x-4">
+            <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-800 hover:text-blue-600 social-icon transition text-2xl">
+              <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-800 hover:text-blue-600 social-icon transition text-2xl">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </div>
         </div>
-        <div class="mb-4 slide-up">
-          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-          <input type="email" id="email" name="email" class="form-input w-full p-3 border rounded-lg" required>
-        </div>
-        <div class="mb-4 slide-up">
-          <label for="message" class="block text-sm font-medium text-gray-700">Message</label>
-          <textarea id="message" name="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
-        </div>
-        <button type="submit" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 slide-up">Send Message</button>
-      </form>
-      <p id="form-message" class="text-center mt-4 text-green-600 hidden">Message sent successfully!</p>
+        <form id="contact-form" class="slide-up">
+          <div class="mb-4">
+            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input type="text" id="name" name="name" class="form-input w-full p-3 border rounded-lg" required>
+          </div>
+          <div class="mb-4">
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input type="email" id="email" name="email" class="form-input w-full p-3 border rounded-lg" required>
+          </div>
+          <div class="mb-4">
+            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+            <input type="text" id="subject" name="subject" class="form-input w-full p-3 border rounded-lg" required>
+          </div>
+          <div class="mb-4">
+            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea id="message" name="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
+          </div>
+          <button type="submit" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold w-full">Send Message</button>
+        </form>
+      </div>
+      <p id="form-message" class="text-center mt-6 hidden"></p>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-blue-800 text-white py-6 text-center">
-    <p class="mb-2">© 2025 Tebogo Mathaba. All rights reserved.</p>
-    <div class="flex justify-center space-x-4">
-      <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
-        <i class="fab fa-github fa-lg"></i>
-      </a>
-      <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-400 hover:text-blue-300 social-icon transition">
-        <i class="fab fa-linkedin fa-lg"></i>
-      </a>
+  <footer class="bg-blue-800 text-white py-8">
+    <div class="container mx-auto px-4 text-center">
+      <p class="mb-4">© 2025 Tebogo Mathaba. All rights reserved.</p>
+      <div class="flex justify-center space-x-6 mb-4">
+        <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-300 hover:text-white social-icon transition">
+          <i class="fab fa-github fa-lg"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-300 hover:text-white social-icon transition">
+          <i class="fab fa-linkedin fa-lg"></i>
+        </a>
+      </div>
+      <p class="text-sm text-blue-300">Designed and developed with ❤️ by Tebogo Mathaba</p>
     </div>
   </footer>
 
@@ -434,85 +738,8 @@
   <script>
     // Initialize EmailJS with your User ID
     (function(){
-      emailjs.init("YOUR_USER_ID"); // Replace with your EmailJS User ID
+      // Replace with your actual EmailJS User ID
+      emailjs.init("YOUR_USER_ID_HERE");
     })();
 
-    // Scroll Progress Bar
-    window.addEventListener('scroll', () => {
-      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      document.querySelector('.progress-bar').style.width = scrolled + '%';
-    });
-
-    // Sticky Nav Shrink
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('nav-scrolled');
-      } else {
-        navbar.classList.remove('nav-scrolled');
-      }
-    });
-
-    // Contact Form Submission with EmailJS
-    document.getElementById('contact-form').addEventListener('submit', function(event) {
-      event.preventDefault();
-      const formMessage = document.getElementById('form-message');
-      const name = document.getElementById('name').value;
-      const email = document.getElementById('email').value;
-      const message = document.getElementById('message').value;
-
-      if (name && email && message) {
-        // Send email using EmailJS
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-          name: name,
-          email: email,
-          message: message
-        })
-        .then(function(response) {
-          formMessage.textContent = "Message sent successfully!";
-          formMessage.classList.remove('hidden', 'text-red-600');
-          formMessage.classList.add('text-green-600', 'shake');
-          document.getElementById('contact-form').reset();
-          setTimeout(() => {
-            formMessage.classList.remove('shake');
-            formMessage.classList.add('hidden');
-          }, 3000);
-        }, function(error) {
-          formMessage.textContent = "Failed to send message. Please try again.";
-          formMessage.classList.remove('hidden', 'text-green-600');
-          formMessage.classList.add('text-red-600', 'shake');
-          setTimeout(() => {
-            formMessage.classList.remove('shake');
-            formMessage.classList.add('hidden');
-          }, 3000);
-        });
-      } else {
-        formMessage.textContent = "Please fill out all fields.";
-        formMessage.classList.remove('hidden', 'text-green-600');
-        formMessage.classList.add('text-red-600', 'shake');
-        setTimeout(() => {
-          formMessage.classList.remove('shake');
-          formMessage.classList.add('hidden');
-        }, 3000);
-      }
-    });
-
-    // Scroll Animation for Elements
-    const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .wave-in, .slide-up');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add(entry.target.classList.contains('slide-in-left') ? 'slide-in-left' : 
-                                    entry.target.classList.contains('slide-in-right') ? 'slide-in-right' : 
-                                    entry.target.classList.contains('wave-in') ? 'wave-in' : 'slide-up');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    animatedElements.forEach(element => observer.observe(element));
-  </script>
-</body>
-</html>
+    // Mobile menu toggle
