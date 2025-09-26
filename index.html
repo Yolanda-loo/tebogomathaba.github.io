@@ -3,458 +3,335 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebogo Mathaba - Portfolio</title>
+  <title>Tebogo Mathaba - Windows Portfolio</title>
   <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript, Power BI, and business management.">
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <!-- EmailJS SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
   <style>
-    :root {
-      --primary-blue: #1E40AF;
-      --secondary-blue: #60A5FA;
-      --dark-blue: #1E3A8A;
-      --light-gray: #D1D5DB;
-      --medium-gray: #9CA3AF;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
-    
+
     body {
-      font-family: 'Poppins', sans-serif;
-      scroll-behavior: smooth;
-      opacity: 0;
-      animation: pageLoad 1s ease-in-out forwards;
-      line-height: 1.6;
+      background-color: #008080; /* Classic Windows teal */
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
     }
-    
-    /* Page Load Animation */
-    @keyframes pageLoad {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    
-    /* Navigation Animations */
-    .nav-link {
-      position: relative;
-      opacity: 0;
-      animation: fadeInNav 0.5s ease-in-out forwards;
-    }
-    .nav-link:nth-child(1) { animation-delay: 0.1s; }
-    .nav-link:nth-child(2) { animation-delay: 0.2s; }
-    .nav-link:nth-child(3) { animation-delay: 0.3s; }
-    .nav-link:nth-child(4) { animation-delay: 0.4s; }
-    .nav-link:nth-child(5) { animation-delay: 0.5s; }
-    
-    @keyframes fadeInNav {
-      from { opacity: 0; transform: translateY(-10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .nav-link::after {
-      content: '';
-      position: absolute;
-      width: 0;
-      height: 2px;
-      bottom: -2px;
-      left: 0;
-      background-color: var(--secondary-blue);
-      transition: width 0.3s ease;
-    }
-    
-    .nav-link:hover::after {
+
+    /* Desktop */
+    .desktop {
+      background: linear-gradient(135deg, #808080 0%, #a0a0a0 100%);
+      height: calc(100vh - 40px);
       width: 100%;
-    }
-    
-    .nav-scrolled {
-      padding: 0.5rem 1rem;
-      transition: padding 0.3s ease;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    /* Hero Animations */
-    .hero {
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-gray) 100%);
-      background-attachment: fixed;
-      background-size: 200% 200%;
-      animation: zoomBackground 20s ease-in-out infinite;
       position: relative;
       overflow: hidden;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23808080"/><path d="M0,0 L100,100 M100,0 L0,100" stroke="%23606060" stroke-width="1"/></svg>');
+      background-size: 200px 200px;
     }
-    
-    .hero::before {
-      content: '';
+
+    /* Desktop Icons */
+    .desktop-icon {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.1);
-      z-index: 0;
-    }
-    
-    .hero > * {
-      position: relative;
-      z-index: 1;
-    }
-    
-    @keyframes zoomBackground {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    .profile-img {
-      border-radius: 50%;
-      object-fit: cover;
-      animation: bounceIn 1s ease-in-out;
-      border: 4px solid white;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    }
-    
-    @keyframes bounceIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      60% { transform: scale(1.1); opacity: 1; }
-      100% { transform: scale(1); }
-    }
-    
-    .profile-img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(96, 165, 250, 0.7);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    /* About Animations */
-    .slide-in-left {
-      opacity: 0;
-      transform: translateX(-20px);
-      animation: slideInLeft 0.8s ease-in-out forwards;
-    }
-    
-    .slide-in-right {
-      opacity: 0;
-      transform: translateX(20px);
-      animation: slideInRight 0.8s ease-in-out forwards;
-    }
-    
-    @keyframes slideInLeft {
-      to { opacity: 1; transform: translateX(0); }
-    }
-    
-    @keyframes slideInRight {
-      to { opacity: 1; transform: translateX(0); }
-    }
-    
-    /* Skills Animations */
-    .skill-tag {
-      opacity: 0;
-      animation: fadeInSkill 0.5s ease-in-out forwards;
-      transition: all 0.3s ease;
-    }
-    
-    .skill-tag:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-    
-    .skill-tag:nth-child(odd) { animation-delay: calc(0.1s * var(--index)); }
-    .skill-tag:nth-child(even) { animation-delay: calc(0.15s * var(--index)); }
-    
-    @keyframes fadeInSkill {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Project Animations */
-    .project-card {
-      position: relative;
-      transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-      transform-style: preserve-3d;
-      min-height: 280px;
-      border-radius: 0.75rem;
-      overflow: hidden;
-    }
-    
-    .project-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-    
-    .project-front, .project-back {
-      backface-visibility: hidden;
-      transition: transform 0.6s ease;
-      height: 100%;
-    }
-    
-    .project-back {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transform: rotateY(180deg);
-      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
-      color: white;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      width: 70px;
       text-align: center;
-    }
-    
-    .project-card:hover .project-front {
-      transform: rotateY(-180deg);
-    }
-    
-    .project-card:hover .project-back {
-      transform: rotateY(0deg);
-    }
-    
-    .wave-in {
-      opacity: 0;
-      animation: waveIn 0.8s ease-in-out forwards;
-    }
-    
-    .wave-in:nth-child(1) { animation-delay: 0.2s; }
-    .wave-in:nth-child(2) { animation-delay: 0.4s; }
-    .wave-in:nth-child(3) { animation-delay: 0.6s; }
-    .wave-in:nth-child(4) { animation-delay: 0.8s; }
-    .wave-in:nth-child(5) { animation-delay: 1.0s; }
-    .wave-in:nth-child(6) { animation-delay: 1.2s; }
-    
-    @keyframes waveIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* Contact Animations */
-    .form-input {
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      border: 2px solid #E5E7EB;
-    }
-    
-    .form-input:focus {
-      transform: scale(1.02);
-      border-color: var(--secondary-blue);
-      box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
-      outline: none;
-    }
-    
-    .slide-up {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: slideUp 0.8s ease-in-out forwards;
-    }
-    
-    .slide-up:nth-child(1) { animation-delay: 0.2s; }
-    .slide-up:nth-child(2) { animation-delay: 0.4s; }
-    .slide-up:nth-child(3) { animation-delay: 0.6s; }
-    .slide-up:nth-child(4) { animation-delay: 0.8s; }
-    
-    @keyframes slideUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    .shake {
-      animation: shake 0.5s ease-in-out;
-    }
-    
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      20%, 60% { transform: translateX(-5px); }
-      40%, 80% { transform: translateX(5px); }
-    }
-    
-    /* Footer Animations */
-    .social-icon {
-      transition: transform 0.3s ease;
-    }
-    
-    .social-icon:hover {
-      transform: translateY(-3px);
-      color: var(--secondary-blue) !important;
-    }
-    
-    /* Scroll Progress Bar */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--secondary-blue), var(--primary-blue));
-      width: 0;
-      z-index: 20;
-      transition: width 0.3s ease;
-    }
-    
-    /* Blue Accent */
-    .blue-accent {
-      background-color: var(--primary-blue);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .blue-accent::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s;
-    }
-    
-    .blue-accent:hover::before {
-      left: 100%;
-    }
-    
-    .blue-accent:hover {
-      background-color: var(--dark-blue);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(30, 64, 175, 0.3);
-    }
-    
-    /* Section spacing */
-    section {
-      scroll-margin-top: 80px;
-    }
-    
-    /* Back to top button */
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--primary-blue);
-      color: white;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       cursor: pointer;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
+      padding: 5px;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+
+    .desktop-icon:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px dotted #c0c0c0;
+    }
+
+    .desktop-icon img {
+      width: 32px;
+      height: 32px;
+      margin-bottom: 5px;
+    }
+
+    .desktop-icon span {
+      display: block;
+      color: white;
+      font-size: 12px;
+      text-shadow: 1px 1px 1px black;
+    }
+
+    /* Windows */
+    .window {
+      position: absolute;
+      background-color: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      min-width: 300px;
+      min-height: 200px;
+      display: none;
       z-index: 10;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-    
-    .back-to-top.visible {
-      opacity: 1;
-      visibility: visible;
+
+    .window.active {
+      display: block;
+      z-index: 100;
     }
-    
-    .back-to-top:hover {
-      background: var(--dark-blue);
-      transform: translateY(-3px);
-    }
-    
-    /* Typing animation */
-    .typing-text {
-      overflow: hidden;
-      border-right: 2px solid white;
-      white-space: nowrap;
-      margin: 0 auto;
-      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
-    }
-    
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
-    }
-    
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: white }
-    }
-    
-    /* Dark mode toggle */
-    .dark-mode-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--primary-blue);
+
+    .window-header {
+      background: linear-gradient(90deg, #000080, #1084d0);
       color: white;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
+      padding: 3px 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: move;
+      user-select: none;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    .window-title {
       display: flex;
       align-items: center;
-      justify-content: center;
+    }
+
+    .window-title img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .window-controls {
+      display: flex;
+    }
+
+    .window-control {
+      width: 16px;
+      height: 14px;
+      margin-left: 2px;
+      background-color: #c0c0c0;
+      border: 1px outset #c0c0c0;
+      text-align: center;
+      line-height: 12px;
+      font-size: 10px;
+      font-weight: bold;
       cursor: pointer;
-      z-index: 20;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     }
-    
-    /* Dark mode styles */
-    .dark-mode {
-      background-color: #1a202c;
-      color: #e2e8f0;
+
+    .window-control:hover {
+      background-color: #d0d0d0;
     }
-    
-    .dark-mode .bg-white {
-      background-color: #2d3748;
-      color: #e2e8f0;
+
+    .window-content {
+      padding: 10px;
+      height: calc(100% - 25px);
+      overflow: auto;
+      background-color: #c0c0c0;
     }
-    
-    .dark-mode .bg-gray-50 {
-      background-color: #4a5568;
+
+    .window-content img {
+      max-width: 100%;
     }
-    
-    .dark-mode .text-gray-800 {
-      color: #e2e8f0;
-    }
-    
-    .dark-mode .text-gray-600 {
-      color: #cbd5e0;
-    }
-    
-    .dark-mode .bg-gray-400 {
-      background-color: #718096;
-    }
-    
-    .dark-mode .form-input {
-      background-color: #4a5568;
-      color: #e2e8f0;
-      border-color: #718096;
-    }
-    
-    /* Particle background */
-    .particles-container {
-      position: absolute;
-      top: 0;
+
+    /* Taskbar */
+    .taskbar {
+      position: fixed;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 100%;
-      z-index: 0;
+      height: 40px;
+      background: linear-gradient(to bottom, #c0c0c0, #808080);
+      border-top: 2px outset #c0c0c0;
+      display: flex;
+      align-items: center;
+      padding: 0 5px;
+      z-index: 1000;
     }
-    
-    /* Loading animation */
+
+    .start-button {
+      height: 30px;
+      padding: 0 10px;
+      background: linear-gradient(to bottom, #c0c0c0, #808080);
+      border: 2px outset #c0c0c0;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+      margin-right: 5px;
+    }
+
+    .start-button:hover {
+      background: linear-gradient(to bottom, #d0d0d0, #909090);
+    }
+
+    .start-button:active {
+      border: 2px inset #c0c0c0;
+    }
+
+    .taskbar-items {
+      display: flex;
+      flex-grow: 1;
+    }
+
+    .taskbar-item {
+      height: 30px;
+      padding: 0 10px;
+      margin-right: 2px;
+      background: linear-gradient(to bottom, #c0c0c0, #808080);
+      border: 2px outset #c0c0c0;
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      cursor: pointer;
+      max-width: 200px;
+      overflow: hidden;
+    }
+
+    .taskbar-item.active {
+      border: 2px inset #c0c0c0;
+      background: linear-gradient(to bottom, #808080, #c0c0c0);
+    }
+
+    .taskbar-item img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    .clock {
+      padding: 0 10px;
+      font-size: 12px;
+      color: black;
+      font-weight: bold;
+    }
+
+    /* Start Menu */
+    .start-menu {
+      position: fixed;
+      bottom: 40px;
+      left: 0;
+      width: 200px;
+      background-color: #c0c0c0;
+      border: 2px outset #c0c0c0;
+      display: none;
+      z-index: 1001;
+    }
+
+    .start-menu-header {
+      background: linear-gradient(90deg, #000080, #1084d0);
+      color: white;
+      padding: 10px;
+      font-weight: bold;
+    }
+
+    .start-menu-item {
+      padding: 8px 10px;
+      border-bottom: 1px solid #808080;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+    }
+
+    .start-menu-item:hover {
+      background-color: #000080;
+      color: white;
+    }
+
+    .start-menu-item img {
+      width: 16px;
+      height: 16px;
+      margin-right: 10px;
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 16px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #c0c0c0;
+      border: 1px inset #c0c0c0;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #c0c0c0;
+      border: 1px outset #c0c0c0;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d0d0d0;
+    }
+
+    /* Content styling */
+    h1, h2, h3 {
+      color: #000080;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    ul {
+      margin-left: 20px;
+      margin-bottom: 10px;
+    }
+
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .project-item {
+      background: #d0d0d0;
+      border: 1px outset #d0d0d0;
+      padding: 10px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .project-item:hover {
+      background: #e0e0e0;
+    }
+
+    /* To make colors different for new projects, add classes */
+    .project-item.new1 {
+      background: #b0b0b0;
+    }
+
+    .project-item.new2 {
+      background: #c8c8c8;
+    }
+
+    .project-item.new3 {
+      background: #d8d8d8;
+    }
+
+    /* Loading Screen */
     .loader {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: var(--primary-blue);
+      background: #008080;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 9999;
       transition: opacity 0.5s, visibility 0.5s;
     }
-    
+
     .loader.hidden {
       opacity: 0;
       visibility: hidden;
     }
-    
+
     .loader-spinner {
       width: 50px;
       height: 50px;
@@ -463,639 +340,526 @@
       border-top-color: white;
       animation: spin 1s ease-in-out infinite;
     }
-    
+
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .nav-links {
-        flex-direction: column;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        background: var(--primary-blue);
-        padding: 1rem;
-        display: none;
-      }
-      
-      .nav-links.active {
-        display: flex;
-      }
-      
-      .nav-link {
-        padding: 0.5rem 0;
-        width: 100%;
-        text-align: center;
-      }
-      
-      .hamburger {
-        display: block;
-      }
-      
-      .project-card {
-        min-height: 300px;
-      }
-    }
-    
-    @media (max-width: 640px) {
-      .project-card {
-        min-height: 320px;
-      }
-      
-      .hero h2 {
-        font-size: 2rem;
-      }
-      
-      .hero p {
-        font-size: 1rem;
-      }
-    }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body>
   <!-- Loading Screen -->
   <div class="loader" id="loader">
     <div class="loader-spinner"></div>
   </div>
 
-  <!-- Scroll Progress Bar -->
-  <div class="progress-bar"></div>
+  <!-- Desktop -->
+  <div class="desktop" id="desktop">
+    <!-- Desktop Icons -->
+    <div class="desktop-icon" style="top: 20px; left: 20px;" data-window="about">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000080'/><text x='16' y='20' font-family='Arial' font-size='16' fill='white' text-anchor='middle'>?</text></svg>" alt="About Me">
+      <span>About Me</span>
+    </div>
+    <div class="desktop-icon" style="top: 20px; left: 110px;" data-window="projects">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23008000'/><text x='16' y='20' font-family='Arial' font-size='16' fill='white' text-anchor='middle'>P</text></svg>" alt="Projects">
+      <span>My Projects</span>
+    </div>
+    <div class="desktop-icon" style="top: 20px; left: 200px;" data-window="cv">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23800000'/><text x='16' y='20' font-family='Arial' font-size='14' fill='white' text-anchor='middle'>CV</text></svg>" alt="CV">
+      <span>My CV</span>
+    </div>
+    <div class="desktop-icon" style="top: 20px; left: 290px;" data-window="contact">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23808000'/><text x='16' y='20' font-family='Arial' font-size='14' fill='white' text-anchor='middle'>@</text></svg>" alt="Contact">
+      <span>Contact Me</span>
+    </div>
 
-  <!-- Dark Mode Toggle -->
-  <div class="dark-mode-toggle" id="darkModeToggle">
-    <i class="fas fa-moon"></i>
+    <!-- Windows -->
+    <div class="window" id="window-about" style="width: 500px; height: 400px; top: 100px; left: 150px;">
+      <div class="window-header">
+        <div class="window-title">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000080'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>?</text></svg>" alt="About">
+          About Me
+        </div>
+        <div class="window-controls">
+          <div class="window-control" data-action="minimize">_</div>
+          <div class="window-control" data-action="maximize">□</div>
+          <div class="window-control" data-action="close">×</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <img src="my_image/my_image.jpg" alt="Tebogo Mathaba" style="width:150px; height:150px; border-radius:50%; float:left; margin:0 15px 15px 0; border: 2px solid #808080;">
+        <h1>About Me</h1>
+        <p>Hi, I'm Tebogo Mathaba, a passionate software developer specializing in Python, JavaScript, Power BI, and business management solutions.</p>
+        <h2>My Journey</h2>
+        <p>I'm a final-year software development student at WeThinkCode, with a background in Information Technology and Computer Science (2018–2020) and a certificate in Information and Management Systems from Alison.</p>
+        <p>My professional experience spans roles as a Scanner/Counter at Ghekko, Management Assistant at Volkswagen, Assistant Administrator at Founder Institute, and Assistant Manager at Investable, complemented by training with Huawei (2020) and Mercer (2021).</p>
+        <h2>What I Do</h2>
+        <p>I specialize in creating data-driven solutions, such as management dashboards in Power BI, and have developed applications using Python, JavaScript, HTML, CSS, C#, and SQL.</p>
+        <p>My certifications include Microsoft Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), Microsoft Digital Literacy, Web Designer Certification, and Project Planning (Spec Con).</p>
+        <p>Beyond technical skills, I bring strong leadership and communication abilities, honed as Editor-in-Chief of my school newspaper and through volunteer work with Higher Health and NOSA (First Aid Level 1). I'm excited to combine my passion for technology and business management to tackle new challenges.</p>
+      </div>
+    </div>
+
+    <div class="window" id="window-projects" style="width: 600px; height: 450px; top: 120px; left: 200px;">
+      <div class="window-header">
+        <div class="window-title">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23008000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>P</text></svg>" alt="Projects">
+          My Projects
+        </div>
+        <div class="window-controls">
+          <div class="window-control" data-action="minimize">_</div>
+          <div class="window-control" data-action="maximize">□</div>
+          <div class="window-control" data-action="close">×</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <h1>My Projects</h1>
+        <p>Here are some of my recent projects:</p>
+        <div class="project-grid">
+          <div class="project-item" onclick="openProjectDetails('Power BI Management Dashboard', 'Developed interactive dashboards for business management, enabling data-driven decisions through scheduling, data analysis, and visualizations.', 'Power BI, SQL, Data Analysis', null)">
+            <h3>Power BI Dashboard</h3>
+            <p>Data Visualization • Business Intelligence</p>
+          </div>
+          <div class="project-item" onclick="openProjectDetails('To-Do List App', 'A task management application built with Python (Tkinter) and Java (Swing), featuring add, delete, and view tasks with a user-friendly GUI.', 'Python, Tkinter, Java, Swing', 'https://github.com/Yolanda-loo/To-Do-List')">
+            <h3>To-Do List App</h3>
+            <p>Python • Java • GUI Development</p>
+          </div>
+          <div class="project-item" onclick="openProjectDetails('Password Generator', 'A secure password generator with customizable length and character types, built with Python (Tkinter) and Java (Swing) for a seamless user experience.', 'Python, Tkinter, Java, Swing', 'https://github.com/Yolanda-loo/password_generator')">
+            <h3>Password Generator</h3>
+            <p>Security • Python • Java</p>
+          </div>
+          <div class="project-item" onclick="openProjectDetails('Web Scraper', 'A Python-based web scraper using BeautifulSoup to extract data from websites, with structured output for analysis.', 'Python, BeautifulSoup, pandas', 'https://github.com/Yolanda-loo/Web_Srapper')">
+            <h3>Web Scraper</h3>
+            <p>Web Scraping • Data Extraction • Python</p>
+          </div>
+          <div class="project-item" onclick="openProjectDetails('Snake Game', 'A classic Snake game built with Python and Pygame, featuring smooth controls, score tracking, and collision detection for an engaging user experience.', 'Python, Pygame', 'https://github.com/tebogomathaba/snake-game')">
+            <h3>Snake Game</h3>
+            <p>Game Development • Python • Pygame</p>
+          </div>
+          <div class="project-item" onclick="openProjectDetails('Guessing Number Game', 'An interactive number guessing game built with Python, where players guess a randomly generated number with feedback on attempts and hints.', 'Python', 'https://github.com/tebogomathaba/guessing-number-game')">
+            <h3>Number Game</h3>
+            <p>Python • Game Logic • User Interaction</p>
+          </div>
+          <!-- New projects -->
+          <div class="project-item new1" onclick="openProjectDetails('Personal Website', 'My personal website', 'HTML', 'https://github.com/tebogomathaba/tebogomathaba.github.io')">
+            <h3>Personal Website</h3>
+            <p>Web Development • HTML</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('Ubutu Pay', 'Ubutu Pay project website', 'HTML', 'https://github.com/tebogomathaba/Ubutu_Pay.github.io')">
+            <h3>Ubutu Pay</h3>
+            <p>Web Development • HTML</p>
+          </div>
+          <div class="project-item new3" onclick="openProjectDetails('AI Code Exercises', 'Code Exercises for AI Course for Software Engineers', 'Java', 'https://github.com/tebogomathaba/ai-code-exercises')">
+            <h3>AI Code Exercises</h3>
+            <p>AI • Java</p>
+          </div>
+          <div class="project-item new1" onclick="openProjectDetails('Facial Emotion Web', 'Facial emotion detection web application', 'Python', 'https://github.com/tebogomathaba/facial_web.github.io')">
+            <h3>Facial Emotion Web</h3>
+            <p>AI • Python</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('Portfolio Java', 'Java portfolio project', 'HTML', 'https://github.com/tebogomathaba/portfoliojava')">
+            <h3>Portfolio Java</h3>
+            <p>Web Development • HTML</p>
+          </div>
+          <div class="project-item new3" onclick="openProjectDetails('Pong Game', 'A two-player Pong game built with Python and Tkinter, featuring a clean, intuitive UI and classic gameplay.', 'Python, Tkinter', 'https://github.com/tebogomathaba/PongGame')">
+            <h3>Pong Game</h3>
+            <p>Game Development • Python</p>
+          </div>
+          <div class="project-item new1" onclick="openProjectDetails('Calculator Interface', 'Graphical User Interface (GUI) Calculator in Python using Tkinter', 'Python, Tkinter', 'https://github.com/tebogomathaba/calculator_interface')">
+            <h3>Calculator Interface</h3>
+            <p>GUI Development • Python</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('Yolanda-loo', 'Config files for my GitHub profile', 'Config', 'https://github.com/tebogomathaba/Yolanda-loo')">
+            <h3>Yolanda-loo</h3>
+            <p>Configuration</p>
+          </div>
+          <div class="project-item new3" onclick="openProjectDetails('Snake Game HTML', 'Snake game in HTML', 'HTML', 'https://github.com/tebogomathaba/Snake_Game')">
+            <h3>Snake Game HTML</h3>
+            <p>Game Development • HTML</p>
+          </div>
+          <div class="project-item new1" onclick="openProjectDetails('Progressive Web App', 'Progressive web app project', 'HTML', 'https://github.com/tebogomathaba/Progressive_web_App.github.io')">
+            <h3>Progressive Web App</h3>
+            <p>Web Development • HTML</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('Guessing Number Game Java', 'Guessing number game in Java', 'Java', 'https://github.com/tebogomathaba/Guessing-number-game-java')">
+            <h3>Number Game Java</h3>
+            <p>Game Logic • Java</p>
+          </div>
+          <div class="project-item new3" onclick="openProjectDetails('Guessing Number Game', 'Guessing number game in Python', 'Python', 'https://github.com/tebogomathaba/Guessing-number-game')">
+            <h3>Number Game Python</h3>
+            <p>Game Logic • Python</p>
+          </div>
+          <div class="project-item new1" onclick="openProjectDetails('To-Do List Java', 'To-Do List in Java', 'Java', 'https://github.com/tebogomathaba/To-Do-List-java')">
+            <h3>To-Do List Java</h3>
+            <p>GUI Development • Java</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('To-Do List', 'To-Do List in Python', 'Python', 'https://github.com/tebogomathaba/To-Do-List')">
+            <h3>To-Do List Python</h3>
+            <p>GUI Development • Python</p>
+          </div>
+          <div class="project-item new3" onclick="openProjectDetails('Github Personal Projects Python', 'Personal Python projects', 'Python', 'https://github.com/tebogomathaba/Github_personal-projects-python')">
+            <h3>Personal Projects Python</h3>
+            <p>Personal Projects • Python</p>
+          </div>
+          <div class="project-item new1" onclick="openProjectDetails('Simple Calculator', 'Simple calculator in Python', 'Python', 'https://github.com/tebogomathaba/simple-calculator1')">
+            <h3>Simple Calculator</h3>
+            <p>Utility • Python</p>
+          </div>
+          <div class="project-item new2" onclick="openProjectDetails('Flappy MyBird', 'Flappy Bird clone', 'Python', 'https://github.com/tebogomathaba/Flappy_mybird')">
+            <h3>Flappy MyBird</h3>
+            <p>Game Development • Python</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="window" id="window-cv" style="width: 550px; height: 500px; top: 80px; left: 250px;">
+      <div class="window-header">
+        <div class="window-title">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23800000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>CV</text></svg>" alt="CV">
+          My CV
+        </div>
+        <div class="window-controls">
+          <div class="window-control" data-action="minimize">_</div>
+          <div class="window-control" data-action="maximize">□</div>
+          <div class="window-control" data-action="close">×</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <h1>Tebogo Mathaba - Software Engineer</h1>
+        <h2>Technical Skills</h2>
+        <ul>
+          <li>Python, JavaScript, HTML/CSS, C#, SQL</li>
+          <li>Power BI, Data Analysis, Azure (AZ-204, AZ-900)</li>
+          <li>Web Development, GUI Development, Game Development</li>
+        </ul>
+        
+        <h2>Professional Skills</h2>
+        <ul>
+          <li>Leadership, Communication, Customer Service</li>
+          <li>Project Management, Problem Solving, Team Collaboration</li>
+        </ul>
+        
+        <h2>Experience</h2>
+        <p><strong>Software Development Student</strong> - WeThinkCode (2022-Present)</p>
+        <p><strong>Assistant Manager</strong> - Investable (2021-2022)</p>
+        <p><strong>Assistant Administrator</strong> - Founder Institute (2020-2021)</p>
+        <p><strong>Management Assistant</strong> - Volkswagen (2019-2020)</p>
+        <p><strong>Scanner/Counter</strong> - Ghekko (2018-2019)</p>
+        
+        <h2>Education</h2>
+        <p><strong>Software Development</strong> - WeThinkCode (2022-Present)</p>
+        <p><strong>Information Technology & Computer Science(not completed)</strong> (2018-2020)</p>
+        <p><strong>Information and Management Systems Certificate</strong> - Alison</p>
+        
+        <h2>Certifications</h2>
+        <ul>
+          <li>Microsoft Azure Developer Associate (AZ-204)</li>
+          <li>Azure Fundamentals (AZ-900)</li>
+          <li>Microsoft Digital Literacy</li>
+          <li>Web Designer Certification</li>
+          <li>Project Planning (Spec Con)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="window" id="window-contact" style="width: 400px; height: 300px; top: 150px; left: 300px;">
+      <div class="window-header">
+        <div class="window-title">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23808000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>@</text></svg>" alt="Contact">
+          Contact Me
+        </div>
+        <div class="window-controls">
+          <div class="window-control" data-action="minimize">_</div>
+          <div class="window-control" data-action="maximize">□</div>
+          <div class="window-control" data-action="close">×</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <h1>Get In Touch</h1>
+        <p><strong>Email:</strong> tebogomathaba09@gmail.com</p>
+        <p><strong>Phone:</strong> +27 74054 4802</p>
+        <p><strong>Location:</strong> Johannesburg, South Africa</p>
+        <p><strong>GitHub:</strong> github.com/tebogomathaba</p>
+        <p><strong>LinkedIn:</strong> linkedin.com/in/tebogo-mathaba-835b42207</p>
+      </div>
+    </div>
+
+    <!-- Project Details Window -->
+    <div class="window" id="window-project-details" style="width: 500px; height: 400px; top: 150px; left: 200px; display: none;">
+      <div class="window-header">
+        <div class="window-title">
+          <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23008000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>P</text></svg>" alt="Project Details">
+          Project Details
+        </div>
+        <div class="window-controls">
+          <div class="window-control" data-action="minimize">_</div>
+          <div class="window-control" data-action="maximize">□</div>
+          <div class="window-control" data-action="close">×</div>
+        </div>
+      </div>
+      <div class="window-content">
+        <h1 id="project-title">Project Title</h1>
+        <p id="project-description">Project description goes here.</p>
+        <h2>Tech Stack</h2>
+        <p id="project-tech">Technologies used in the project.</p>
+        <h2>Links</h2>
+        <p id="project-link">GitHub repositories available upon request.</p>
+      </div>
+    </div>
   </div>
 
-  <!-- Back to Top Button -->
-  <div class="back-to-top" id="backToTop">
-    <i class="fas fa-arrow-up"></i>
+  <!-- Taskbar -->
+  <div class="taskbar">
+    <div class="start-button" id="start-button">
+      <span>Start</span>
+    </div>
+    <div class="taskbar-items" id="taskbar-items">
+      <!-- Taskbar items will be added dynamically -->
+    </div>
+    <div class="clock" id="clock">12:00 PM</div>
   </div>
 
-  <!-- Navigation -->
-  <nav id="navbar" class="bg-blue-800 bg-opacity-90 backdrop-blur-md text-white p-4 sticky top-0 shadow-md z-10">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold">Tebogo Mathaba</h1>
-      <button class="hamburger md:hidden text-white focus:outline-none" id="hamburger">
-        <i class="fas fa-bars text-xl"></i>
-      </button>
-      <ul class="nav-links hidden md:flex space-x-6" id="navLinks">
-        <li><a href="#home" class="nav-link hover:text-blue-300 transition">Home</a></li>
-        <li><a href="#about" class="nav-link hover:text-blue-300 transition">About</a></li>
-        <li><a href="#skills" class="nav-link hover:text-blue-300 transition">Skills</a></li>
-        <li><a href="#projects" class="nav-link hover:text-blue-300 transition">Projects</a></li>
-        <li><a href="#contact" class="nav-link hover:text-blue-300 transition">Contact</a></li>
-      </ul>
+  <!-- Start Menu -->
+  <div class="start-menu" id="start-menu">
+    <div class="start-menu-header">Tebogo Mathaba Portfolio</div>
+    <div class="start-menu-item" data-window="about">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23000080'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>?</text></svg>" alt="About">
+      About Me
     </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="hero py-20 text-center text-white">
-    <div class="particles-container" id="particles"></div>
-    <div class="container mx-auto px-4">
-      <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba - Software Developer" class="profile-img w-40 h-40 mx-auto mb-6">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4 typing-text">Software Developer & Data Analyst</h2>
-      <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Hi, I'm Tebogo Mathaba, a passionate software developer specializing in Python, JavaScript, Power BI, and business management solutions.</p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold inline-block">View My Work</a>
-        <a href="#contact" class="bg-white text-blue-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition inline-block">Contact Me</a>
-      </div>
+    <div class="start-menu-item" data-window="projects">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23008000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>P</text></svg>" alt="Projects">
+      My Projects
     </div>
-  </section>
-
-  <!-- About Section -->
-  <section id="about" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">About Me</h2>
-      <div class="max-w-4xl mx-auto">
-        <div class="grid md:grid-cols-2 gap-8 items-center">
-          <div class="slide-in-left">
-            <h3 class="text-2xl font-semibold mb-4 text-blue-800">My Journey</h3>
-            <p class="text-lg mb-4">
-              I'm a final-year software development student at WeThinkCode, with a background in Information Technology and Computer Science (2018–2020) and a certificate in Information and Management Systems from Alison.
-            </p>
-            <p class="text-lg mb-4">
-              My professional experience spans roles as a Scanner/Counter at Ghekko, Management Assistant at Volkswagen, Assistant Administrator at Founder Institute, and Assistant Manager at Investable, complemented by training with Huawei (2020) and Mercer (2021).
-            </p>
-          </div>
-          <div class="slide-in-right bg-blue-50 p-6 rounded-lg">
-            <h3 class="text-2xl font-semibold mb-4 text-blue-800">What I Do</h3>
-            <p class="text-lg mb-4">
-              I specialize in creating data-driven solutions, such as management dashboards in Power BI, and have developed applications using Python, JavaScript, HTML, CSS, C#, and SQL.
-            </p>
-            <p class="text-lg">
-              My certifications include Microsoft Azure Developer Associate (AZ-204), Azure Fundamentals (AZ-900), Microsoft Digital Literacy, Web Designer Certification, and Project Planning (Spec Con).
-            </p>
-          </div>
-        </div>
-        <div class="mt-8 text-center slide-in-right">
-          <p class="text-lg">
-            Beyond technical skills, I bring strong leadership and communication abilities, honed as Editor-in-Chief of my school newspaper and through volunteer work with Higher Health and NOSA (First Aid Level 1). I'm excited to combine my passion for technology and business management to tackle new challenges.
-          </p>
-        </div>
-      </div>
+    <div class="start-menu-item" data-window="cv">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23800000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>CV</text></svg>" alt="CV">
+      My CV
     </div>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills" class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">My Skills</h2>
-      <div class="max-w-4xl mx-auto">
-        <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">Technical Skills</h3>
-        <div class="flex flex-wrap justify-center gap-3 mb-8">
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 1;">Python</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 2;">JavaScript</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 3;">HTML/CSS</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 4;">C#</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 5;">SQL</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 6;">Power BI</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 7;">Data Analysis</span>
-          <span class="skill-tag bg-blue-800 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 8;">Azure (AZ-204, AZ-900)</span>
-        </div>
-        
-        <h3 class="text-xl font-semibold mb-4 text-center text-blue-800">Professional Skills</h3>
-        <div class="flex flex-wrap justify-center gap-3">
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 9;">Leadership</span>
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 10;">Communication</span>
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 11;">Customer Service</span>
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 12;">Project Management</span>
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 13;">Problem Solving</span>
-          <span class="skill-tag bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-semibold" style="--index: 14;">Team Collaboration</span>
-        </div>
-      </div>
+    <div class="start-menu-item" data-window="contact">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><rect width='16' height='16' fill='%23808000'/><text x='8' y='12' font-family='Arial' font-size='10' fill='white' text-anchor='middle'>@</text></svg>" alt="Contact">
+      Contact Me
     </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="projects" class="py-16 bg-white">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-in-left">My Projects</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Project 1: Power BI Dashboard -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-chart-bar text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">Power BI Management Dashboard</h3>
-              <p class="text-gray-600">
-                Developed interactive dashboards for business management, enabling data-driven decisions through scheduling, data analysis, and visualizations.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Data Visualization • Business Intelligence</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Power BI, SQL, Data Analysis</p>
-            <p class="text-sm opacity-90">Available upon request</p>
-          </div>
-        </div>
-        
-        <!-- Project 2: To-Do List App -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-tasks text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">To-Do List App</h3>
-              <p class="text-gray-600">
-                A task management application built with Python (Tkinter) and Java (Swing), featuring add, delete, and view tasks with a user-friendly GUI.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Python • Java • GUI Development</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Python, Tkinter, Java, Swing</p>
-            <a href="https://github.com/Yolanda-loo/To-Do-List" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
-          </div>
-        </div>
-        
-        <!-- Project 3: Password Generator -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-key text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">Password Generator</h3>
-              <p class="text-gray-600">
-                A secure password generator with customizable length and character types, built with Python (Tkinter) and Java (Swing) for a seamless user experience.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Security • Python • Java</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Python, Tkinter, Java, Swing</p>
-            <a href="https://github.com/Yolanda-loo/password_generator" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
-          </div>
-        </div>
-        
-        <!-- Project 4: Web Scraper -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-spider text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">Web Scraper</h3>
-              <p class="text-gray-600">
-                A Python-based web scraper using BeautifulSoup to extract data from websites, with structured output for analysis.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Web Scraping • Data Extraction • Python</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Python, BeautifulSoup, pandas</p>
-            <a href="https://github.com/Yolanda-loo/Web_Srapper" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
-          </div>
-        </div>
-        
-        <!-- Project 5: Snake Game -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-gamepad text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">Snake Game</h3>
-              <p class="text-gray-600">
-                A classic Snake game built with Python and Pygame, featuring smooth controls, score tracking, and collision detection for an engaging user experience.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Game Development • Python • Pygame</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Python, Pygame</p>
-            <a href="https://github.com/tebogomathaba/snake-game" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
-          </div>
-        </div>
-        
-        <!-- Project 6: Guessing Number Game -->
-        <div class="project-card bg-white rounded-lg shadow-md wave-in">
-          <div class="project-front h-full flex flex-col">
-            <div class="p-6 flex-grow">
-              <div class="mb-4 text-blue-800">
-                <i class="fas fa-dice text-3xl"></i>
-              </div>
-              <h3 class="text-xl font-semibold mb-3">Guessing Number Game</h3>
-              <p class="text-gray-600">
-                An interactive number guessing game built with Python, where players guess a randomly generated number with feedback on attempts and hints.
-              </p>
-            </div>
-            <div class="p-4 bg-gray-50 border-t">
-              <span class="text-sm text-blue-800 font-medium">Python • Game Logic • User Interaction</span>
-            </div>
-          </div>
-          <div class="project-back">
-            <h4 class="text-lg font-semibold mb-2">Project Details</h4>
-            <p class="mb-4">Tech Stack: Python</p>
-            <a href="https://github.com/tebogomathaba/guessing-number-game" target="_blank" class="text-blue-300 hover:text-white underline transition">View on GitHub</a>
-          </div>
-        </div>
-      </div>
+    <div class="start-menu-item" id="shutdown">
+      <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'><circle cx='8' cy='8' r='7' fill='%23800000'/><text x='8' y='11' font-family='Arial' font-size='8' fill='white' text-anchor='middle'>O</text></svg>" alt="Shutdown">
+      Shutdown
     </div>
-  </section>
+  </div>
 
-  <!-- Contact Section -->
-  <section id="contact" class="bg-gray-50 py-16">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 slide-up">Get in Touch</h2>
-      <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-        <div class="slide-up">
-          <h3 class="text-2xl font-semibold mb-4 text-blue-800">Let's Connect</h3>
-          <p class="mb-6">I'm always open to discussing new opportunities, collaborations, or just having a chat about technology and innovation.</p>
-          <div class="space-y-4">
-            <div class="flex items-center">
-              <i class="fas fa-envelope text-blue-800 mr-3"></i>
-              <span>tebogomathaba09@gmail.com</span> 
-            </div>
-            <div class="flex items-center">
-              <i class="fas fa-phone text-blue-800 mr-3"></i>
-              <span>+27 74054 4802</span> 
-            </div>
-            <div class="flex items-center">
-              <i class="fas fa-map-marker-alt text-blue-800 mr-3"></i>
-              <span>Johannesburg, South Africa</span>
-            </div>
-          </div>
-          <div class="mt-6 flex space-x-4">
-            <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-800 hover:text-blue-600 social-icon transition text-2xl">
-              <i class="fab fa-github"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-800 hover:text-blue-600 social-icon transition text-2xl">
-              <i class="fab fa-linkedin"></i>
-            </a>
-          </div>
-        </div>
-        <form id="contact-form" class="slide-up">
-          <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name</label>
-            <input type="text" id="name" name="name" class="form-input w-full p-3 border rounded-lg" required>
-          </div>
-          <div class="mb-4">
-            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" id="email" name="email" class="form-input w-full p-3 border rounded-lg" required>
-          </div>
-          <div class="mb-4">
-            <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
-            <input type="text" id="subject" name="subject" class="form-input w-full p-3 border rounded-lg" required>
-          </div>
-          <div class="mb-4">
-            <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
-            <textarea id="message" name="message" rows="5" class="form-input w-full p-3 border rounded-lg" required></textarea>
-          </div>
-          <button type="submit" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold w-full">Send Message</button>
-        </form>
-      </div>
-      <p id="form-message" class="text-center mt-6 hidden"></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-blue-800 text-white py-8">
-    <div class="container mx-auto px-4 text-center">
-      <p class="mb-4">© 2025 Tebogo Mathaba. All rights reserved.</p>
-      <div class="flex justify-center space-x-6 mb-4">
-        <a href="https://github.com/tebogomathaba" target="_blank" class="text-blue-300 hover:text-white social-icon transition">
-          <i class="fab fa-github fa-lg"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/tebogo-mathaba-835b42207" target="_blank" class="text-blue-300 hover:text-white social-icon transition">
-          <i class="fab fa-linkedin fa-lg"></i>
-        </a>
-      </div>
-      <p class="text-sm text-blue-300">Designed and developed with ❤️ by Tebogo Mathaba</p>
-    </div>
-  </footer>
-
-  <!-- JavaScript -->
   <script>
-    // Initialize EmailJS with your User ID
-    (function(){
-      // Replace with your actual EmailJS User ID
-      emailjs.init("YOUR_USER_ID_HERE");
-    })();
+    // Clock functionality
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      document.getElementById('clock').textContent = timeString;
+    }
+    
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // DOM Content Loaded
-    document.addEventListener('DOMContentLoaded', function() {
-      // Hide loader after page loads
+    // Window management
+    let zIndex = 10;
+    let activeWindow = null;
+    const windows = document.querySelectorAll('.window');
+    const desktopIcons = document.querySelectorAll('.desktop-icon');
+    const startMenuItems = document.querySelectorAll('.start-menu-item');
+    const taskbarItems = document.getElementById('taskbar-items');
+    
+    // Make windows draggable
+    windows.forEach(window => {
+      const header = window.querySelector('.window-header');
+      let isDragging = false;
+      let offsetX, offsetY;
+      
+      header.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        offsetX = e.clientX - window.offsetLeft;
+        offsetY = e.clientY - window.offsetTop;
+        bringToFront(window);
+      });
+      
+      document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        window.style.left = (e.clientX - offsetX) + 'px';
+        window.style.top = (e.clientY - offsetY) + 'px';
+      });
+      
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+      
+      // Window controls
+      const controls = window.querySelectorAll('.window-control');
+      controls.forEach(control => {
+        control.addEventListener('click', () => {
+          const action = control.getAttribute('data-action');
+          handleWindowControl(window, action);
+        });
+      });
+    });
+    
+    // Function to bring window to front
+    function bringToFront(window) {
+      zIndex++;
+      window.style.zIndex = zIndex;
+      activeWindow = window;
+      
+      // Update taskbar
+      updateTaskbar();
+    }
+    
+    // Function to handle window controls
+    function handleWindowControl(window, action) {
+      switch(action) {
+        case 'minimize':
+          window.style.display = 'none';
+          updateTaskbar();
+          break;
+        case 'maximize':
+          if (window.style.width === '100vw' && window.style.height === 'calc(100vh - 40px)') {
+            // Restore
+            window.style.width = window.dataset.originalWidth || '500px';
+            window.style.height = window.dataset.originalHeight || '400px';
+            window.style.left = window.dataset.originalLeft || '100px';
+            window.style.top = window.dataset.originalTop || '100px';
+          } else {
+            // Maximize
+            window.dataset.originalWidth = window.style.width;
+            window.dataset.originalHeight = window.style.height;
+            window.dataset.originalLeft = window.style.left;
+            window.dataset.originalTop = window.style.top;
+            
+            window.style.width = '100vw';
+            window.style.height = 'calc(100vh - 40px)';
+            window.style.left = '0';
+            window.style.top = '0';
+          }
+          break;
+        case 'close':
+          window.style.display = 'none';
+          updateTaskbar();
+          break;
+      }
+    }
+    
+    // Function to open a window
+    function openWindow(windowId) {
+      const window = document.getElementById(`window-${windowId}`);
+      if (window) {
+        window.style.display = 'block';
+        bringToFront(window);
+      }
+    }
+    
+    // Function to update taskbar
+    function updateTaskbar() {
+      taskbarItems.innerHTML = '';
+      
+      windows.forEach(window => {
+        if (window.style.display === 'block') {
+          const windowId = window.id.replace('window-', '');
+          const title = window.querySelector('.window-title').textContent;
+          const icon = window.querySelector('.window-title img').outerHTML;
+          
+          const taskbarItem = document.createElement('div');
+          taskbarItem.className = 'taskbar-item';
+          if (window === activeWindow) {
+            taskbarItem.classList.add('active');
+          }
+          taskbarItem.innerHTML = `${icon} ${title}`;
+          
+          taskbarItem.addEventListener('click', () => {
+            if (window.style.display === 'none') {
+              window.style.display = 'block';
+              bringToFront(window);
+            } else if (window === activeWindow) {
+              window.style.display = 'none';
+              updateTaskbar();
+            } else {
+              bringToFront(window);
+            }
+          });
+          
+          taskbarItems.appendChild(taskbarItem);
+        }
+      });
+    }
+    
+    // Desktop icon click handlers
+    desktopIcons.forEach(icon => {
+      icon.addEventListener('dblclick', () => {
+        const windowId = icon.getAttribute('data-window');
+        openWindow(windowId);
+      });
+    });
+    
+    // Start menu functionality
+    const startButton = document.getElementById('start-button');
+    const startMenu = document.getElementById('start-menu');
+    
+    startButton.addEventListener('click', () => {
+      if (startMenu.style.display === 'block') {
+        startMenu.style.display = 'none';
+      } else {
+        startMenu.style.display = 'block';
+        // Bring start menu to front
+        zIndex++;
+        startMenu.style.zIndex = zIndex;
+      }
+    });
+    
+    // Start menu item click handlers
+    startMenuItems.forEach(item => {
+      if (item.id !== 'shutdown') {
+        item.addEventListener('click', () => {
+          const windowId = item.getAttribute('data-window');
+          openWindow(windowId);
+          startMenu.style.display = 'none';
+        });
+      }
+    });
+    
+    // Shutdown functionality
+    document.getElementById('shutdown').addEventListener('click', () => {
+      document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: black; color: white; font-size: 24px;">Windows is shutting down...</div>';
+      setTimeout(() => {
+        document.body.innerHTML = '<div style="display: flex; justify-content: center; align-items: center; height: 100vh; background-color: black; color: white; font-size: 24px;">It\'s now safe to turn off your computer.</div>';
+      }, 2000);
+    });
+    
+    // Close start menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!startButton.contains(e.target) && !startMenu.contains(e.target)) {
+        startMenu.style.display = 'none';
+      }
+    });
+    
+    // Project details function
+    function openProjectDetails(title, description, tech, link) {
+      document.getElementById('project-title').textContent = title;
+      document.getElementById('project-description').textContent = description;
+      document.getElementById('project-tech').textContent = tech;
+      
+      const projectLink = document.getElementById('project-link');
+      if (link) {
+        projectLink.innerHTML = `<a href="${link}" target="_blank" style="color: #000080; text-decoration: underline;">View on GitHub</a>`;
+      } else {
+        projectLink.textContent = "Available upon request.";
+      }
+      
+      const projectWindow = document.getElementById('window-project-details');
+      projectWindow.style.display = 'block';
+      bringToFront(projectWindow);
+    }
+    
+    // Hide loader after page loads
+    window.addEventListener('load', () => {
       setTimeout(() => {
         document.getElementById('loader').classList.add('hidden');
       }, 1000);
-
-      // Mobile menu toggle
-      const hamburger = document.getElementById('hamburger');
-      const navLinks = document.getElementById('navLinks');
-      
-      if (hamburger) {
-        hamburger.addEventListener('click', () => {
-          navLinks.classList.toggle('active');
-          hamburger.innerHTML = navLinks.classList.contains('active') 
-            ? '<i class="fas fa-times text-xl"></i>' 
-            : '<i class="fas fa-bars text-xl"></i>';
-        });
-      }
-
-      // Close mobile menu when clicking on a link
-      document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-          if (window.innerWidth < 768) {
-            navLinks.classList.remove('active');
-            hamburger.innerHTML = '<i class="fas fa-bars text-xl"></i>';
-          }
-        });
-      });
-
-      // Scroll Progress Bar
-      window.addEventListener('scroll', () => {
-        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        document.querySelector('.progress-bar').style.width = scrolled + '%';
-      });
-
-      // Sticky Nav Shrink
-      const navbar = document.getElementById('navbar');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-          navbar.classList.add('nav-scrolled');
-        } else {
-          navbar.classList.remove('nav-scrolled');
-        }
-      });
-
-      // Back to Top Button
-      const backToTop = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-          backToTop.classList.add('visible');
-        } else {
-          backToTop.classList.remove('visible');
-        }
-      });
-
-      backToTop.addEventListener('click', () => {
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-      });
-
-      // Dark Mode Toggle
-      const darkModeToggle = document.getElementById('darkModeToggle');
-      darkModeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        const icon = darkModeToggle.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-          icon.classList.remove('fa-moon');
-          icon.classList.add('fa-sun');
-        } else {
-          icon.classList.remove('fa-sun');
-          icon.classList.add('fa-moon');
-        }
-        
-        // Save preference to localStorage
-        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
-      });
-
-      // Check for saved dark mode preference
-      if (localStorage.getItem('darkMode') === 'true') {
-        document.body.classList.add('dark-mode');
-        darkModeToggle.querySelector('i').classList.remove('fa-moon');
-        darkModeToggle.querySelector('i').classList.add('fa-sun');
-      }
-
-      // Particle Background
-      createParticles();
-
-      // Contact Form Submission with EmailJS
-      document.getElementById('contact-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const formMessage = document.getElementById('form-message');
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const subject = document.getElementById('subject').value;
-        const message = document.getElementById('message').value;
-
-        if (name && email && subject && message) {
-          // Send email using EmailJS
-          emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-            name: name,
-            email: email,
-            subject: subject,
-            message: message
-          })
-          .then(function(response) {
-            formMessage.textContent = "Message sent successfully!";
-            formMessage.classList.remove('hidden', 'text-red-600', 'shake');
-            formMessage.classList.add('text-green-600', 'shake');
-            document.getElementById('contact-form').reset();
-            setTimeout(() => {
-              formMessage.classList.remove('shake');
-              formMessage.classList.add('hidden');
-            }, 3000);
-          }, function(error) {
-            formMessage.textContent = "Failed to send message. Please try again.";
-            formMessage.classList.remove('hidden', 'text-green-600');
-            formMessage.classList.add('text-red-600', 'shake');
-            setTimeout(() => {
-              formMessage.classList.remove('shake');
-              formMessage.classList.add('hidden');
-            }, 3000);
-          });
-        } else {
-          formMessage.textContent = "Please fill out all fields.";
-          formMessage.classList.remove('hidden', 'text-green-600');
-          formMessage.classList.add('text-red-600', 'shake');
-          setTimeout(() => {
-            formMessage.classList.remove('shake');
-            formMessage.classList.add('hidden');
-          }, 3000);
-        }
-      });
-
-      // Scroll Animation for Elements
-      const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .wave-in, .slide-up');
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const animationClass = Array.from(entry.target.classList).find(cls => 
-              cls.includes('slide-in') || cls.includes('wave-in') || cls.includes('slide-up')
-            );
-            if (animationClass) {
-              entry.target.classList.add(animationClass);
-            }
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      animatedElements.forEach(element => observer.observe(element));
-
-      // Skill tags animation on scroll
-      const skillTags = document.querySelectorAll('.skill-tag');
-      const skillObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.style.animationDelay = entry.target.style.getPropertyValue('--index') * 0.1 + 's';
-            entry.target.classList.add('fadeInSkill');
-            skillObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.1 });
-
-      skillTags.forEach(tag => skillObserver.observe(tag));
     });
-
-    // Particle Background Function
-    function createParticles() {
-      const container = document.getElementById('particles');
-      const particleCount = 50;
-      
-      for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = Math.random() * 5 + 2 + 'px';
-        particle.style.height = particle.style.width;
-        particle.style.backgroundColor = 'rgba(255, 255, 255, ' + (Math.random() * 0.5 + 0.1) + ')';
-        particle.style.borderRadius = '50%';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        
-        // Add keyframes for floating animation
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes float {
-            0% {
-              transform: translate(0, 0);
-            }
-            25% {
-              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-            }
-            50% {
-              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-            }
-            75% {
-              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
-            }
-            100% {
-              transform: translate(0, 0);
-            }
-          }
-        `;
-        document.head.appendChild(style);
-        
-        container.appendChild(particle);
-      }
-    }
-
-    // Add smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        // Close mobile menu if open
-        const navLinks = document.getElementById('navLinks');
-        const hamburger = document.getElementById('hamburger');
-        if (navLinks.classList.contains('active')) {
-          navLinks.classList.remove('active');
-          hamburger.innerHTML = '<i class="fas fa-bars text-xl"></i>';
-        }
-      }
-    });
+    
+    // Initialize with About Me window open
+    openWindow('about');
   </script>
 </body>
 </html>
-
