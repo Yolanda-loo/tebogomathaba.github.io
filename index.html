@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tebogo Mathaba - Software Developer Portfolio</title>
+  <title>Tebogo Mathaba - Portfolio</title>
   <meta name="description" content="Portfolio of Tebogo Mathaba, a software developer skilled in Python, JavaScript, Power BI, and business management.">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -355,6 +355,119 @@
       transform: translateY(-3px);
     }
     
+    /* Typing animation */
+    .typing-text {
+      overflow: hidden;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      margin: 0 auto;
+      animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: white }
+    }
+    
+    /* Dark mode toggle */
+    .dark-mode-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-blue);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 20;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Dark mode styles */
+    .dark-mode {
+      background-color: #1a202c;
+      color: #e2e8f0;
+    }
+    
+    .dark-mode .bg-white {
+      background-color: #2d3748;
+      color: #e2e8f0;
+    }
+    
+    .dark-mode .bg-gray-50 {
+      background-color: #4a5568;
+    }
+    
+    .dark-mode .text-gray-800 {
+      color: #e2e8f0;
+    }
+    
+    .dark-mode .text-gray-600 {
+      color: #cbd5e0;
+    }
+    
+    .dark-mode .bg-gray-400 {
+      background-color: #718096;
+    }
+    
+    .dark-mode .form-input {
+      background-color: #4a5568;
+      color: #e2e8f0;
+      border-color: #718096;
+    }
+    
+    /* Particle background */
+    .particles-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    /* Loading animation */
+    .loader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--primary-blue);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
     /* Responsive Adjustments */
     @media (max-width: 768px) {
       .nav-links {
@@ -400,26 +513,24 @@
         font-size: 1rem;
       }
     }
-    
-    /* Print styles */
-    @media print {
-      .hero, .back-to-top, .progress-bar, nav {
-        display: none;
-      }
-      
-      body {
-        color: black;
-        background: white;
-      }
-    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-800">
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
   <!-- Scroll Progress Bar -->
   <div class="progress-bar"></div>
 
+  <!-- Dark Mode Toggle -->
+  <div class="dark-mode-toggle" id="darkModeToggle">
+    <i class="fas fa-moon"></i>
+  </div>
+
   <!-- Back to Top Button -->
-  <div class="back-to-top">
+  <div class="back-to-top" id="backToTop">
     <i class="fas fa-arrow-up"></i>
   </div>
 
@@ -427,10 +538,10 @@
   <nav id="navbar" class="bg-blue-800 bg-opacity-90 backdrop-blur-md text-white p-4 sticky top-0 shadow-md z-10">
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-xl font-bold">Tebogo Mathaba</h1>
-      <button class="hamburger md:hidden text-white focus:outline-none">
+      <button class="hamburger md:hidden text-white focus:outline-none" id="hamburger">
         <i class="fas fa-bars text-xl"></i>
       </button>
-      <ul class="nav-links hidden md:flex space-x-6">
+      <ul class="nav-links hidden md:flex space-x-6" id="navLinks">
         <li><a href="#home" class="nav-link hover:text-blue-300 transition">Home</a></li>
         <li><a href="#about" class="nav-link hover:text-blue-300 transition">About</a></li>
         <li><a href="#skills" class="nav-link hover:text-blue-300 transition">Skills</a></li>
@@ -442,9 +553,10 @@
 
   <!-- Hero Section -->
   <section id="home" class="hero py-20 text-center text-white">
+    <div class="particles-container" id="particles"></div>
     <div class="container mx-auto px-4">
       <img src="My%20images/my_image.jpg" alt="Tebogo Mathaba - Software Developer" class="profile-img w-40 h-40 mx-auto mb-6">
-      <h2 class="text-4xl md:text-5xl font-bold mb-4">Software Developer & Data Analyst</h2>
+      <h2 class="text-4xl md:text-5xl font-bold mb-4 typing-text">Software Developer & Data Analyst</h2>
       <p class="text-lg md:text-xl mb-6 max-w-2xl mx-auto">Hi, I'm Tebogo Mathaba, a passionate software developer specializing in Python, JavaScript, Power BI, and business management solutions.</p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
         <a href="#projects" class="blue-accent text-white px-6 py-3 rounded-lg font-semibold inline-block">View My Work</a>
@@ -734,7 +846,7 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Animations and Contact Form -->
+  <!-- JavaScript -->
   <script>
     // Initialize EmailJS with your User ID
     (function(){
@@ -742,4 +854,247 @@
       emailjs.init("YOUR_USER_ID_HERE");
     })();
 
-    // Mobile menu toggle
+    // DOM Content Loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Hide loader after page loads
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('hidden');
+      }, 1000);
+
+      // Mobile menu toggle
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      
+      if (hamburger) {
+        hamburger.addEventListener('click', () => {
+          navLinks.classList.toggle('active');
+          hamburger.innerHTML = navLinks.classList.contains('active') 
+            ? '<i class="fas fa-times text-xl"></i>' 
+            : '<i class="fas fa-bars text-xl"></i>';
+        });
+      }
+
+      // Close mobile menu when clicking on a link
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          if (window.innerWidth < 768) {
+            navLinks.classList.remove('active');
+            hamburger.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+          }
+        });
+      });
+
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        document.querySelector('.progress-bar').style.width = scrolled + '%';
+      });
+
+      // Sticky Nav Shrink
+      const navbar = document.getElementById('navbar');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add('nav-scrolled');
+        } else {
+          navbar.classList.remove('nav-scrolled');
+        }
+      });
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+
+      // Dark Mode Toggle
+      const darkModeToggle = document.getElementById('darkModeToggle');
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        const icon = darkModeToggle.querySelector('i');
+        if (document.body.classList.contains('dark-mode')) {
+          icon.classList.remove('fa-moon');
+          icon.classList.add('fa-sun');
+        } else {
+          icon.classList.remove('fa-sun');
+          icon.classList.add('fa-moon');
+        }
+        
+        // Save preference to localStorage
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+      });
+
+      // Check for saved dark mode preference
+      if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+        darkModeToggle.querySelector('i').classList.remove('fa-moon');
+        darkModeToggle.querySelector('i').classList.add('fa-sun');
+      }
+
+      // Particle Background
+      createParticles();
+
+      // Contact Form Submission with EmailJS
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formMessage = document.getElementById('form-message');
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const subject = document.getElementById('subject').value;
+        const message = document.getElementById('message').value;
+
+        if (name && email && subject && message) {
+          // Send email using EmailJS
+          emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+            name: name,
+            email: email,
+            subject: subject,
+            message: message
+          })
+          .then(function(response) {
+            formMessage.textContent = "Message sent successfully!";
+            formMessage.classList.remove('hidden', 'text-red-600', 'shake');
+            formMessage.classList.add('text-green-600', 'shake');
+            document.getElementById('contact-form').reset();
+            setTimeout(() => {
+              formMessage.classList.remove('shake');
+              formMessage.classList.add('hidden');
+            }, 3000);
+          }, function(error) {
+            formMessage.textContent = "Failed to send message. Please try again.";
+            formMessage.classList.remove('hidden', 'text-green-600');
+            formMessage.classList.add('text-red-600', 'shake');
+            setTimeout(() => {
+              formMessage.classList.remove('shake');
+              formMessage.classList.add('hidden');
+            }, 3000);
+          });
+        } else {
+          formMessage.textContent = "Please fill out all fields.";
+          formMessage.classList.remove('hidden', 'text-green-600');
+          formMessage.classList.add('text-red-600', 'shake');
+          setTimeout(() => {
+            formMessage.classList.remove('shake');
+            formMessage.classList.add('hidden');
+          }, 3000);
+        }
+      });
+
+      // Scroll Animation for Elements
+      const animatedElements = document.querySelectorAll('.slide-in-left, .slide-in-right, .wave-in, .slide-up');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const animationClass = Array.from(entry.target.classList).find(cls => 
+              cls.includes('slide-in') || cls.includes('wave-in') || cls.includes('slide-up')
+            );
+            if (animationClass) {
+              entry.target.classList.add(animationClass);
+            }
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      animatedElements.forEach(element => observer.observe(element));
+
+      // Skill tags animation on scroll
+      const skillTags = document.querySelectorAll('.skill-tag');
+      const skillObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationDelay = entry.target.style.getPropertyValue('--index') * 0.1 + 's';
+            entry.target.classList.add('fadeInSkill');
+            skillObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      skillTags.forEach(tag => skillObserver.observe(tag));
+    });
+
+    // Particle Background Function
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = Math.random() * 5 + 2 + 'px';
+        particle.style.height = particle.style.width;
+        particle.style.backgroundColor = 'rgba(255, 255, 255, ' + (Math.random() * 0.5 + 0.1) + ')';
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+        particle.style.animationDelay = Math.random() * 5 + 's';
+        
+        // Add keyframes for floating animation
+        const style = document.createElement('style');
+        style.textContent = `
+          @keyframes float {
+            0% {
+              transform: translate(0, 0);
+            }
+            25% {
+              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+            }
+            50% {
+              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+            }
+            75% {
+              transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px);
+            }
+            100% {
+              transform: translate(0, 0);
+            }
+          }
+        `;
+        document.head.appendChild(style);
+        
+        container.appendChild(particle);
+      }
+    }
+
+    // Add smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Add keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        // Close mobile menu if open
+        const navLinks = document.getElementById('navLinks');
+        const hamburger = document.getElementById('hamburger');
+        if (navLinks.classList.contains('active')) {
+          navLinks.classList.remove('active');
+          hamburger.innerHTML = '<i class="fas fa-bars text-xl"></i>';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
